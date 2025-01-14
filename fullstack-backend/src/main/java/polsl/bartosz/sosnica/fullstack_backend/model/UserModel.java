@@ -7,14 +7,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 @Entity
 @Table(name = "Users")
 @Getter
 @Setter
+@Data
 @AllArgsConstructor
 public class UserModel {
 
@@ -39,5 +38,14 @@ public class UserModel {
 
     @Column(name = "email")
     private String email;
+
+    public UserModel(String username, String password, String name, String surname, String email) {
+        this.createdAt = LocalDateTime.now();
+        this.username = username;
+        this.password = password;
+        this.name = name;
+        this.surname = surname;
+        this.email = email;
+    }
 
 }

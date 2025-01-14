@@ -17,6 +17,10 @@ public class RequestRegisterDTO {
     @Size(min = 4)
     private String password;
 
+    @NotEmpty(message = "Password confirmation cannot be empty")
+    @Size(min = 4)
+    private String passwordConfirmation;
+
     @NotEmpty(message = "Name cannot be empty")
     private String name;
 
