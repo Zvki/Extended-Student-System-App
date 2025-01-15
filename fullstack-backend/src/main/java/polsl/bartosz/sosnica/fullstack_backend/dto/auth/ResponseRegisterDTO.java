@@ -1,6 +1,8 @@
 package polsl.bartosz.sosnica.fullstack_backend.dto.auth;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.Setter;
 
 @AllArgsConstructor
 @Getter
