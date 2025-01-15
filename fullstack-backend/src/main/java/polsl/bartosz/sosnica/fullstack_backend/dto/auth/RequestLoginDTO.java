@@ -12,9 +12,8 @@ import lombok.Setter;
 @AllArgsConstructor
 public class RequestLoginDTO {
 
-    private String username;
-
     @Email
+    @NotEmpty
     private String email;
 
     @NotEmpty(message = "Password cannot be empty")

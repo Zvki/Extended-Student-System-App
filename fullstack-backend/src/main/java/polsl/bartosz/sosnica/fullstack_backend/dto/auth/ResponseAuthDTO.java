@@ -7,7 +7,7 @@ import lombok.Setter;
 @AllArgsConstructor
 @Getter
 @Setter
-public class ResponseRegisterDTO {
+public class ResponseAuthDTO {
 
     private Long id;
     private String username;

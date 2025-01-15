@@ -9,8 +9,9 @@ import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
+import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestLoginDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestRegisterDTO;
-import polsl.bartosz.sosnica.fullstack_backend.dto.auth.ResponseRegisterDTO;
+import polsl.bartosz.sosnica.fullstack_backend.dto.auth.ResponseAuthDTO;
 import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
 import polsl.bartosz.sosnica.fullstack_backend.service.AuthService;
 import polsl.bartosz.sosnica.fullstack_backend.utils.MyValidationUtils;
@@ -30,8 +31,26 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login() {
-        return ResponseEntity.ok("Login");
+    public ResponseEntity<?> login(@RequestBody RequestLoginDTO loginData) {
+
+        Set<ConstraintViolation<RequestLoginDTO>> violations = validator.validate(loginData);
+
+        if (!violations.isEmpty()) {
+            Map<String, String> errors = MyValidationUtils.extractValidationErrors(violations);
+            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "Validation failed", null, errors);
+            return ResponseEntity.badRequest().body(apiResponse);
+        }
+
+        var loginResult = authService.login(loginData);
+
+        if (loginResult == null) {
+            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "Login failed", null, null);
+            return ResponseEntity.badRequest().body(apiResponse);
+        }
+
+        var correctResponse = new ApiResponse<ResponseAuthDTO>(true, "Logged in", loginResult, null);
+
+        return ResponseEntity.ok(correctResponse);
     }
 
     @PostMapping("/register")
@@ -52,7 +71,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(apiResponse);
         }
 
-        var correctResponse = new ApiResponse<ResponseRegisterDTO>(true, "Registered", registerResult, null);
+        var correctResponse = new ApiResponse<ResponseAuthDTO>(true, "Registered", registerResult, null);
 
         return ResponseEntity.ok(correctResponse);
     }
