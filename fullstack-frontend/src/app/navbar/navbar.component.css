@@ -1,0 +1,32 @@
+.navbar {
+    background-color: #A5BFCC;
+    padding: 15px 30px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: #F4EDD3;
+  }
+  
+  .navbar .logo {
+    font-size: 24px;  /* Zwiększ rozmiar czcionki */
+    font-weight: 400;
+    color: #F4EDD3;
+    letter-spacing: 2px;  /* Możesz dodać odstępy między literami */
+  }
+
+  .navbar .nav-links {
+    display: flex;
+    gap: 20px;
+  }
+  
+  .navbar a {
+    text-decoration: none;
+    color: #F4EDD3;
+    font-size: 16px;
+    font-weight: 500;
+    transition: color 0.3s;
+  }
+  
+  .navbar a:hover {
+    color: #7E99A3;
+  }
