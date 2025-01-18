@@ -1,38 +1,37 @@
-/* Główne ustawienia */
+
 .navbar {
-    background: linear-gradient(90deg, #1F1C2C, #928DAB);/* Gradient futurystyczny */
+    background: linear-gradient(90deg, #1F1C2C, #928DAB);
     padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
     color: #E4F9F5;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtelne cienie */
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
     position: sticky;
     top: 0;
     z-index: 1000;
-    transition: background-color 1s ease; /* Animacja zmiany koloru */
+    transition: background-color 1s ease;
 }
 
 .navbar:hover {
-    background: linear-gradient(90deg, #1A374D, #406882, #62959C); /* Zmiana koloru przy hover */
+    background: linear-gradient(90deg, #1A374D, #406882, #62959C);
 }
 
-/* Logo */
 .navbar .logo a {
     font-size: 28px;
     font-weight: 700;
     color: #E4F9F5;
     text-transform: uppercase;
-    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtelny cień */
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease, color 0.3s ease;
 }
 
 .navbar .logo a:hover {
     color: #A4EBF3;
-    transform: scale(1.1); /* Powiększenie logo przy hover */
+    transform: scale(1.1);
 }
 
-/* Linki nawigacyjne */
+
 .navbar .nav-links {
     display: flex;
     gap: 25px;
@@ -43,11 +42,11 @@
     color: #E4F9F5;
     font-size: 18px;
     font-weight: 500;
-    position: relative; /* Dla efektów pseudo-elementów */
+    position: relative;
     transition: color 0.3s, transform 0.3s ease;
 }
 
-/* Efekt linii pod linkami */
+
 .navbar a::after {
     content: "";
     position: absolute;
@@ -65,10 +64,10 @@
 
 .navbar a:hover {
     color: #A4EBF3;
-    transform: translateY(-2px); /* Subtelne przesunięcie linku */
+    transform: translateY(-2px); 
 }
 
-/* Responsywność */
+
 @media (max-width: 768px) {
     .navbar {
         flex-direction: column;

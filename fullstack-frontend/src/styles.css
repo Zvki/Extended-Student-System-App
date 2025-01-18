@@ -5,8 +5,10 @@
   }
   
   body {
-    font-family: "Roboto", serif;
+    font-family: "Poppins";
     background-color: #4C585B;
-    height: 100vh;
+    height: 100%;
     width: 100%; 
+    overflow: hidden; /* Usuń przewijanie */
+
   }

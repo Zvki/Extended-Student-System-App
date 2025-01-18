@@ -1,4 +1,4 @@
-/* Landing Page Główne */
+
 .landing-page {
     display: flex;
     flex-direction: column;
@@ -10,11 +10,11 @@
     min-height: 100vh;
 }
 
-/* Hero Sekcja */
+
 .hero {
     text-align: center;
     padding: 60px 20px;
-    background: rgba(0, 0, 0, 0.4); /* Subtelne przezroczyste tło */
+    background: rgba(0, 0, 0, 0.4); 
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
@@ -48,7 +48,7 @@
     font-size: 18px;
     cursor: pointer;
     border-radius: 25px;
-    transition: background 0.3s, transform 0.3s;
+    transition: background 0.7s ease-in-out, transform 0.7s ease-in-out;
 }
 
 .hero button:hover {
@@ -56,7 +56,6 @@
     transform: translateY(-3px);
 }
 
-/* Feature Sekcja */
 .features {
     display: flex;
     gap: 30px;
@@ -91,7 +90,6 @@
     box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
 }
 
-/* Responsywność */
 @media (max-width: 768px) {
     .features {
         flex-direction: column;
