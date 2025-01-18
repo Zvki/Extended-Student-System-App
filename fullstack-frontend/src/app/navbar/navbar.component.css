@@ -1,32 +1,82 @@
+/* Główne ustawienia */
 .navbar {
-    background-color: #A5BFCC;
-    padding: 15px 30px;
+    background: linear-gradient(90deg, #1F1C2C, #928DAB);/* Gradient futurystyczny */
+    padding: 15px 40px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    color: #F4EDD3;
-  }
-  
-  .navbar .logo {
-    font-size: 24px;  /* Zwiększ rozmiar czcionki */
-    font-weight: 400;
-    color: #F4EDD3;
-    letter-spacing: 2px;  /* Możesz dodać odstępy między literami */
-  }
+    color: #E4F9F5;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Subtelne cienie */
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    transition: background-color 1s ease; /* Animacja zmiany koloru */
+}
 
-  .navbar .nav-links {
+.navbar:hover {
+    background: linear-gradient(90deg, #1A374D, #406882, #62959C); /* Zmiana koloru przy hover */
+}
+
+/* Logo */
+.navbar .logo a {
+    font-size: 28px;
+    font-weight: 700;
+    color: #E4F9F5;
+    text-transform: uppercase;
+    text-shadow: 0 2px 5px rgba(0, 0, 0, 0.3); /* Subtelny cień */
+    transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.navbar .logo a:hover {
+    color: #A4EBF3;
+    transform: scale(1.1); /* Powiększenie logo przy hover */
+}
+
+/* Linki nawigacyjne */
+.navbar .nav-links {
     display: flex;
-    gap: 20px;
-  }
-  
-  .navbar a {
+    gap: 25px;
+}
+
+.navbar a {
     text-decoration: none;
-    color: #F4EDD3;
-    font-size: 16px;
+    color: #E4F9F5;
+    font-size: 18px;
     font-weight: 500;
-    transition: color 0.3s;
-  }
-  
-  .navbar a:hover {
-    color: #7E99A3;
-  }
+    position: relative; /* Dla efektów pseudo-elementów */
+    transition: color 0.3s, transform 0.3s ease;
+}
+
+/* Efekt linii pod linkami */
+.navbar a::after {
+    content: "";
+    position: absolute;
+    left: 0;
+    bottom: -3px;
+    width: 0;
+    height: 2px;
+    background: #A4EBF3;
+    transition: width 0.3s ease;
+}
+
+.navbar a:hover::after {
+    width: 100%;
+}
+
+.navbar a:hover {
+    color: #A4EBF3;
+    transform: translateY(-2px); /* Subtelne przesunięcie linku */
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .navbar {
+        flex-direction: column;
+        gap: 15px;
+    }
+
+    .navbar .nav-links {
+        flex-direction: column;
+        align-items: center;
+    }
+}

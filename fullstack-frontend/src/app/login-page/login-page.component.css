@@ -1,65 +1,109 @@
-  
-  .login-container {
+/* Kontener główny */
+.login-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: 100%;
-  }
-  
-  .login-box {
-    background-color: #A5BFCC;
-    padding: 30px;
-    border-radius: 8px;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    width: 400px;
-  }
-  
-  h2 {
+    height: 100vh;
+    background: linear-gradient(120deg, #1F1C2C, #928DAB); /* Gradient futurystyczny */
+    color: #E4F9F5;
+    padding: 20px;
+}
+
+/* Pudełko logowania */
+.login-box {
+    background: rgba(0, 0, 0, 0.6); /* Transparentne tło */
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+    width: 350px;
     text-align: center;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.login-box:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.6);
+}
+
+/* Nagłówek */
+h2 {
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #A4EBF3;
+    text-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
+}
+
+/* Pola formularza */
+.form-group {
     margin-bottom: 20px;
-    color: #4C585B;
-  }
-  
-  .form-group {
-    margin-bottom: 15px;
-  }
-  
-  .form-group label {
+}
+
+.form-group label {
     display: block;
-    margin-bottom: 5px;
-    color: #4C585B;
-  }
-  
-  .form-group input {
-    width: 100%;
-    padding: 10px;
-    border: 1px solid #ddd;
-    border-radius: 4px;
+    margin-bottom: 8px;
     font-size: 14px;
-  }
-  
-  .form-group input:focus {
-    border-color: #007bff;
+    color: #E4F9F5;
+}
+
+.form-group input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: 8px;
+    font-size: 16px;
+    background: rgba(255, 255, 255, 0.1);
+    color: #E4F9F5;
     outline: none;
-  }
-  
-  .form-action {
+    transition: background 0.3s, border-color 0.3s;
+}
+
+.form-group input:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: #A4EBF3;
+}
+
+/* Przyciski */
+.form-action {
     display: flex;
     justify-content: center;
-  }
-  
-  .login-btn {
+}
+
+.login-btn {
     width: 100%;
-    padding: 10px;
-    background-color: #F4EDD3;
-    color: #4C585B;
+    padding: 12px;
+    background: linear-gradient(90deg, #6DD5FA, #2980B9);
+    color: #fff;
     border: none;
-    border-radius: 4px;
-    cursor: pointer;
+    border-radius: 25px;
     font-size: 16px;
-  }
-  
-  .login-btn:hover {
-    background-color: #7E99A3;
-  }
-  
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.3s ease;
+}
+
+.login-btn:hover {
+    background: linear-gradient(90deg, #2980B9, #6DD5FA);
+    transform: scale(1.05);
+}
+
+/* Responsywność */
+@media (max-width: 768px) {
+    .login-box {
+        width: 90%;
+        padding: 30px;
+    }
+
+    h2 {
+        font-size: 24px;
+    }
+
+    .form-group input {
+        font-size: 14px;
+        padding: 10px;
+    }
+
+    .login-btn {
+        font-size: 14px;
+        padding: 10px;
+    }
+}
