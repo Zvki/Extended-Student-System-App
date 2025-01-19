@@ -1,24 +1,16 @@
 import { Injectable } from '@angular/core';
+import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
 })
 export class AuthService {
-  private userRole: string | null = null;
+  private loginUrl = 'http://localhost:8080/login'; // Adres endpointu backendu
 
-  setUserRole(role: string): void {
-    this.userRole = role;
-  }
+  constructor(private http: HttpClient) {}
 
-  getUserRole(): string | null {
-    return this.userRole;
-  }
-
-  isLoggedIn(): boolean {
-    return this.userRole !== null;
-  }
-
-  logout(): void {
-    this.userRole = null;
+  login(loginData: { email: string; password: string }): Observable<any> {
+    return this.http.post(this.loginUrl, loginData);
   }
 }
