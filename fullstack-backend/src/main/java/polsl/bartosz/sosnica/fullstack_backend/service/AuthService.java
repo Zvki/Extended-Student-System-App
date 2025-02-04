@@ -6,7 +6,6 @@ import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestLoginDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestRegisterDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.ResponseAuthDTO;
 
-import java.util.Optional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
@@ -64,10 +63,6 @@ public class AuthService {
                 registerData.getEmail());
 
         UserModel result = authRepository.save(newUser);
-
-        if (result == null) {
-            return null;
-        }
 
         ResponseAuthDTO responseRegisterDTO = new ResponseAuthDTO(
                 result.getId(),
