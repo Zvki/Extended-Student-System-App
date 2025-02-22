@@ -21,7 +21,7 @@ export class LoginComponent {
   onSubmit(): void {
     const loginData = { email: this.email, password: this.password };
 
-    this.http.post('http://localhost:8080/login', loginData).subscribe({
+    this.http.post('http://localhost:8080/login', loginData, { withCredentials: true }).subscribe({
       next: (response) => {
         console.log('Login successful:', response);
       },

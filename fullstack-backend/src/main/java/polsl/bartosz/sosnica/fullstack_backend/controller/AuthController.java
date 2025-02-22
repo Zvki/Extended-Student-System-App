@@ -7,6 +7,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestLoginDTO;
@@ -14,6 +16,7 @@ import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestRegisterDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.ResponseAuthDTO;
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.IAuthService;
 import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
+import polsl.bartosz.sosnica.fullstack_backend.utils.JwtTokenUtil;
 import polsl.bartosz.sosnica.fullstack_backend.utils.MyValidationUtils;
 
 @RestController
@@ -31,7 +34,7 @@ public class AuthController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<?> login(@RequestBody RequestLoginDTO loginData) {
+    public ResponseEntity<?> login(@RequestBody RequestLoginDTO loginData, HttpServletResponse response) {
 
         Set<ConstraintViolation<RequestLoginDTO>> violations = validator.validate(loginData);
 
@@ -47,6 +50,22 @@ public class AuthController {
             ApiResponse<Void> apiResponse = new ApiResponse<>(false, "Login failed", null, null);
             return ResponseEntity.badRequest().body(apiResponse);
         }
+
+        String jwtToken = JwtTokenUtil.generateToken(loginResult.getUsername());
+
+        if (jwtToken == null) {
+            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "Token generation failed", null, null);
+            return ResponseEntity.badRequest().body(apiResponse);
+        }
+
+        Cookie cookie = new Cookie("authToken", jwtToken);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(60 * 60 * 24);
+        response.addCookie(cookie);
+
+        System.out.println(cookie);
 
         var correctResponse = new ApiResponse<ResponseAuthDTO>(true, "Logged in", loginResult, null);
 

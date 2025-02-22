@@ -11,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 import polsl.bartosz.sosnica.fullstack_backend.repository.AuthRepository;
+import polsl.bartosz.sosnica.fullstack_backend.utils.JwtTokenUtil;
 
 @Service
 public class AuthService implements IAuthService {
