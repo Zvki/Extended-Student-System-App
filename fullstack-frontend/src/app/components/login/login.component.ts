@@ -1,17 +1,17 @@
 import { Component } from '@angular/core';
 import { Router } from '@angular/router';
-import { AuthService } from '../utils/AuthService';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 
+
 @Component({
-  selector: 'app-login-page',
+  selector: 'app-login',
   standalone: true,
   imports: [FormsModule, HttpClientModule],
-  templateUrl: './login-page.component.html',
-  styleUrl: './login-page.component.css'
+  templateUrl: './login.component.html',
+  styleUrl: './login.component.css'
 })
-export class LoginPageComponent {
+export class LoginComponent {
 
   email: string = '';
   password: string = '';
