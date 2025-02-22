@@ -12,8 +12,8 @@ import jakarta.validation.Validator;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestLoginDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestRegisterDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.ResponseAuthDTO;
+import polsl.bartosz.sosnica.fullstack_backend.interfaces.IAuthService;
 import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
-import polsl.bartosz.sosnica.fullstack_backend.service.AuthService;
 import polsl.bartosz.sosnica.fullstack_backend.utils.MyValidationUtils;
 
 @RestController
@@ -23,10 +23,10 @@ public class AuthController {
     private Validator validator;
 
     @Autowired
-    private final AuthService authService;
+    private final IAuthService authService;
 
     @Autowired
-    public AuthController(AuthService authService) {
+    public AuthController(IAuthService authService) {
         this.authService = authService;
     }
 

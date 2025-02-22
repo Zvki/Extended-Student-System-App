@@ -5,6 +5,7 @@ import org.springframework.stereotype.Service;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestLoginDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestRegisterDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.ResponseAuthDTO;
+import polsl.bartosz.sosnica.fullstack_backend.interfaces.IAuthService;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -12,7 +13,7 @@ import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 import polsl.bartosz.sosnica.fullstack_backend.repository.AuthRepository;
 
 @Service
-public class AuthService {
+public class AuthService implements IAuthService {
 
     @Autowired
     AuthRepository authRepository;

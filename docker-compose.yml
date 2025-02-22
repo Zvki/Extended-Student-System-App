@@ -1,0 +1,27 @@
+
+services:
+  backend:
+    build:
+      context: ./fullstack-backend
+      dockerfile: Dockerfile
+    ports:
+      - "8080:8080"
+    volumes:
+      - ./fullstack-backend:/app
+      - /app/target
+    environment:
+      - SPRING_PROFILES_ACTIVE=dev
+    depends_on:
+      - frontend
+
+  frontend:
+    build:
+      context: ./fullstack-frontend
+      dockerfile: Dockerfile
+    ports:
+      - "4200:4200"
+    volumes:
+      - ./fullstack-frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
