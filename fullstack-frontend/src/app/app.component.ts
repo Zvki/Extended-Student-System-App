@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavbarComponent } from './navbar/navbar.component';
-import { FooterComponent } from './footer/footer.component';
+import { NavbarComponent } from './components/navbar/navbar.component';
+import { FooterComponent } from './components/footer/footer.component';
 import { RouterLink, RouterOutlet } from '@angular/router';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -15,4 +15,5 @@ import { FormsModule } from '@angular/forms';
 
 })
 export class AppComponent {
+  title = 'fullstack-frontend';
 }
