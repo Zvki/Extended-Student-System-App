@@ -5,6 +5,8 @@
     <nav class="nav-links">
         <a routerLink="">About</a>
         <a routerLink="">Contact</a>
-        <a routerLink="/login">Sign In</a>
+        <a *ngIf="!(isLoggedIn$ | async)" routerLink="/login">Sign In</a>
+        <a *ngIf="isLoggedIn$ | async" routerLink="/profile">Profile</a>
+        <a *ngIf="isLoggedIn$ | async" (click)="logout()" style="cursor: pointer">Logout</a>
     </nav>
 </header>

@@ -16,7 +16,7 @@ export class LoginComponent {
   email: string = '';
   password: string = '';
 
-  constructor(private http: HttpClient) {}
+  constructor(private http: HttpClient, private router: Router) {}
 
   onSubmit(): void {
     const loginData = { email: this.email, password: this.password };
@@ -24,6 +24,7 @@ export class LoginComponent {
     this.http.post('http://localhost:8080/login', loginData, { withCredentials: true }).subscribe({
       next: (response) => {
         console.log('Login successful:', response);
+        this.router.navigate(['']);
       },
       error: (error) => {
         console.error('Login failed:', error);
