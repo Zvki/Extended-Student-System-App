@@ -1,4 +1,3 @@
-
 .landing-page {
     display: flex;
     flex-direction: column;
@@ -10,21 +9,20 @@
     min-height: 100vh;
 }
 
-
-.hero {
+.hero, .dashboard-header {
     text-align: center;
     padding: 60px 20px;
-    background: rgba(0, 0, 0, 0.4); 
+    background: rgba(0, 0, 0, 0.4);
     border-radius: 15px;
     box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
     transition: transform 0.3s ease;
 }
 
-.hero:hover {
+.hero:hover, .dashboard-header:hover {
     transform: scale(1.05);
 }
 
-.hero h2 {
+.hero h2, .dashboard-header h2 {
     font-size: 48px;
     margin-bottom: 20px;
     font-weight: 700;
@@ -32,15 +30,13 @@
     text-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
 }
 
-.hero p {
-    font-size: 16px;
-    margin-left: 10px; 
-    margin-right: 10px;
-    margin-bottom: 30px;
+.hero p, .dashboard-header p {
+    font-size: 18px;
+    margin: 10px 0;
     line-height: 1.6;
 }
 
-.hero button {
+.hero button, .action-card {
     background: linear-gradient(90deg, #6DD5FA, #2980B9);
     color: #fff;
     border: none;
@@ -51,60 +47,94 @@
     transition: background 0.7s ease-in-out, transform 0.7s ease-in-out;
 }
 
-.hero button:hover {
+.hero button:hover, .action-card:hover {
     background: linear-gradient(90deg, #2980B9, #6DD5FA);
     transform: translateY(-3px);
+    transition: background 10s ease-in-out, transform 1s ease-in-out;
 }
 
-.features {
-    display: flex;
-    gap: 30px;
-    justify-content: center;
-    flex-wrap: wrap;
+/* Stylizacja sekcji szybkich akcji */
+.quick-actions {
+    margin-bottom: 2rem;
+    text-align: center;
 }
 
-.feature-card {
+.quick-actions h3 {
+    margin-top: 20px;
+    font-size: 28px;
+    margin-bottom: 20px;
+}
+
+.action-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+    gap: 20px;
+    width: 100%;
+    max-width: 1000px;
+}
+
+.action-card {
+    padding: 15px;
+    text-align: center;
+    border-radius: 15px;
+    font-size: 16px;
+    transition: transform 0.3s ease;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
+}
+
+.action-card h4 {
+    margin-bottom: 10px;
+    font-size: 20px;
+}
+
+/* Sekcja ostatnich aktywności */
+.recent-activity {
     background: rgba(255, 255, 255, 0.1);
-    padding: 20px 30px;
+    padding: 20px;
     border-radius: 15px;
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-    width: 300px;
     text-align: center;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    width: 100%;
+    max-width: 1000px;
 }
 
-.feature-card h3 {
+.recent-activity h3 {
     font-size: 24px;
-    margin-bottom: 10px;
+    margin-bottom: 15px;
     color: #A4EBF3;
 }
 
-.feature-card p {
-    font-size: 14px;
-    line-height: 1.5;
-    color: #E4F9F5;
+.recent-activity ul {
+    list-style: none;
+    padding: 0;
 }
 
-.feature-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
+.recent-activity li {
+    padding: 8px 0;
+    font-size: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.2);
 }
 
+.recent-activity li:last-child {
+    border-bottom: none;
+}
+
+/* Dostosowanie do responsywności */
 @media (max-width: 768px) {
-    .features {
+    .features, .action-grid {
         flex-direction: column;
         align-items: center;
     }
 
-    .feature-card {
+    .feature-card, .action-card, .recent-activity {
         width: 90%;
     }
 
-    .hero h2 {
+    .hero h2, .dashboard-header h2 {
         font-size: 36px;
     }
 
-    .hero p {
+    .hero p, .dashboard-header p {
         font-size: 18px;
     }
 }
