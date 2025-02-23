@@ -59,13 +59,12 @@ public class AuthController {
         }
 
         Cookie cookie = new Cookie("authToken", jwtToken);
-        cookie.setHttpOnly(true);
         cookie.setSecure(true);
         cookie.setPath("/");
         cookie.setMaxAge(60 * 60 * 24);
         response.addCookie(cookie);
 
-        System.out.println(cookie);
+        System.out.println("Cookie: " + cookie);
 
         var correctResponse = new ApiResponse<ResponseAuthDTO>(true, "Logged in", loginResult, null);
 
