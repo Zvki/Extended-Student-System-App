@@ -3,6 +3,7 @@ import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
+import { UserService } from './UserService';
 
 @Injectable({
   providedIn: 'root',
@@ -12,9 +13,13 @@ export class AuthService {
   private isLoggedIn = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedIn.asObservable();
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, private userService: UserService) {
     this.checkAuthStatus();
     this.listenForRouteChanges();
+  }
+
+  login(userData: any): void {
+    this.userService.setUser(userData);
   }
 
   private checkAuthStatus(): void {
@@ -35,6 +40,7 @@ export class AuthService {
   logout(): void {
     this.deleteCookie('authToken');
     this.isLoggedIn.next(false);
+    this.userService.clearUser();
   }
 
   private getCookie(name: string): string {

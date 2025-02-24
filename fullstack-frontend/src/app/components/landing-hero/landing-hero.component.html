@@ -5,6 +5,8 @@
         <p>Your ultimate solution for managing student and academic data efficiently.</p>
         <button routerLink="/login">Get Started</button>
     </div>
+    <section class="quick-actions">
+        <h3>Quick Info</h3>
     <section class="features">
         <div class="feature-card">
             <h3>Easy to Use</h3>
@@ -19,42 +21,30 @@
             <p>Tailor the system to suit your unique needs effortlessly.</p>
         </div>
     </section>
+    </section>
     </div>
     <div *ngIf="isLoggedIn$ | async">
         <header class="hero">
-            <h2>Welcome back, test!</h2>
+            <h2>Welcome back, {{ username$ | async}}!</h2>
             <p>Manage your academic records and stay on top of your progress.</p>
         </header>
     
         <section class="quick-actions">
             <h3>Quick Actions</h3>
-            <div class="action-grid">
-                <button routerLink="/profile" class="action-card">
-                    <h4>Profile</h4>
+            <section class="features">
+                <a class="feature-card" routerLink="/profile">
+                    <h3>Profile</h3>
                     <p>View and update your personal details.</p>
-                </button>
-                <button routerLink="/courses" class="action-card">
-                    <h4>My Courses</h4>
+                </a>
+                <a class="feature-card">
+                    <h3>My Courses</h3>
                     <p>Access enrolled courses and resources.</p>
-                </button>
-                <button routerLink="/grades" class="action-card">
-                    <h4>Grades</h4>
+                </a>
+                <a class="feature-card">
+                    <h3>Grades</h3>
                     <p>Check your academic performance.</p>
-                </button>
-                <button routerLink="/settings" class="action-card">
-                    <h4>Settings</h4>
-                    <p>Customize your experience.</p>
-                </button>
-            </div>
-        </section>
-    
-        <section class="recent-activity">
-            <h3>Recent Activity</h3>
-            <ul>
-                <li *ngFor="let activity of recentActivities">
-                    📌 test
-                </li>
-            </ul>
+                </a>
+            </section>
         </section>
     </div>
 </div>
