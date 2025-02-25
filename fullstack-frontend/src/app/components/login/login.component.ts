@@ -14,14 +14,22 @@ import { UserService } from '../../utils/UserService';
 })
 export class LoginComponent {
 
+  isLoading: boolean = false;
   email: string = '';
   password: string = '';
 
   constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
 
   onSubmit(): void {
+    this.isLoading = true;
+
+    if (this.isLoading) {
+      this.router.navigate(['/loading']); 
+    }
+
     const loginData = { email: this.email, password: this.password };
 
+    setTimeout(() => {
     this.http.post<{ success: boolean; message: string; data: any }>('http://localhost:8080/login', loginData, { withCredentials: true })
       .subscribe({
         next: (response) => {
@@ -31,12 +39,16 @@ export class LoginComponent {
             this.userService.setUser(response.data);
           }
           
+          this.isLoading = false;
           this.router.navigate(['']);
         },
         error: (error) => {
           console.error('Login failed:', error);
+          this.isLoading = false;
+          this.router.navigate(['/login']);
         }
       });
+    }, 1500);
 }
 
 }

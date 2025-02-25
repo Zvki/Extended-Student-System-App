@@ -15,6 +15,7 @@ import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestLoginDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestRegisterDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.ResponseAuthDTO;
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.IAuthService;
+import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
 import polsl.bartosz.sosnica.fullstack_backend.utils.JwtTokenUtil;
 import polsl.bartosz.sosnica.fullstack_backend.utils.MyValidationUtils;
@@ -51,7 +52,12 @@ public class AuthController {
             return ResponseEntity.badRequest().body(apiResponse);
         }
 
-        String jwtToken = JwtTokenUtil.generateToken(loginResult.getUsername());
+        if (loginResult.getStatus().equals(UserModel.Status.Inactive)) {
+            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "User is not active", null, null);
+            return ResponseEntity.badRequest().body(apiResponse);
+        }
+
+        String jwtToken = JwtTokenUtil.generateToken(loginResult.getName());
 
         if (jwtToken == null) {
             ApiResponse<Void> apiResponse = new ApiResponse<>(false, "Token generation failed", null, null);

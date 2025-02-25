@@ -15,7 +15,7 @@ import { map } from 'rxjs';
 export class LandingHeroComponent {
 
   isLoggedIn$ = this.AuthService.isLoggedIn$;
-  username$ = this.userService.user$.pipe(map(user => user?.username));
+  name$ = this.userService.user$.pipe(map(user => user?.name));
 
   constructor(private AuthService: AuthService, private userService: UserService) {}
 

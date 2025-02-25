@@ -11,7 +11,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 import polsl.bartosz.sosnica.fullstack_backend.repository.AuthRepository;
-import polsl.bartosz.sosnica.fullstack_backend.utils.JwtTokenUtil;
 
 @Service
 public class AuthService implements IAuthService {
@@ -40,11 +39,12 @@ public class AuthService implements IAuthService {
 
         ResponseAuthDTO responseLoginDTO = new ResponseAuthDTO(
                 user.getId(),
-                user.getUsername(),
                 user.getName(),
                 user.getSurname(),
                 user.getEmail(),
-                user.getCreatedAt().toString());
+                user.getCreatedAt().toString(),
+                user.getStatus(),
+                user.getRole());
 
         return responseLoginDTO;
 
@@ -58,8 +58,7 @@ public class AuthService implements IAuthService {
 
         BCryptPasswordEncoder BCryptPasswordEncoder = new BCryptPasswordEncoder();
 
-        UserModel newUser = new UserModel(registerData.getUsername(),
-                BCryptPasswordEncoder.encode(registerData.getPassword()),
+        UserModel newUser = new UserModel(BCryptPasswordEncoder.encode(registerData.getPassword()),
                 registerData.getName(),
                 registerData.getSurname(),
                 registerData.getEmail());
@@ -68,11 +67,12 @@ public class AuthService implements IAuthService {
 
         ResponseAuthDTO responseRegisterDTO = new ResponseAuthDTO(
                 result.getId(),
-                result.getUsername(),
                 result.getName(),
                 result.getSurname(),
                 result.getEmail(),
-                result.getCreatedAt().toString());
+                result.getCreatedAt().toString(),
+                result.getStatus(),
+                result.getRole());
 
         return responseRegisterDTO;
     }
