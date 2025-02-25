@@ -4,6 +4,8 @@ import java.time.LocalDateTime;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
+import jakarta.persistence.EnumType;
+import jakarta.persistence.Enumerated;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.Id;
 import jakarta.persistence.Table;
@@ -30,9 +32,6 @@ public class UserModel {
     @Column(name = "created_at")
     private LocalDateTime createdAt;
 
-    @Column(name = "username")
-    private String username;
-
     @Column(name = "password")
     private String password;
 
@@ -45,13 +44,30 @@ public class UserModel {
     @Column(name = "email")
     private String email;
 
-    public UserModel(String username, String password, String name, String surname, String email) {
+    @Column(name = "role")
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
+    @Column(name = "status")
+    @Enumerated(EnumType.STRING)
+    private Status status;
+
+    public UserModel(String password, String name, String surname, String email) {
         this.createdAt = LocalDateTime.now();
-        this.username = username;
         this.password = password;
         this.name = name;
         this.surname = surname;
         this.email = email;
+        this.role = null;
+        this.status = Status.Inactive;
+    }
+
+    public enum Role {
+        Student, Teacher, Admin
+    }
+
+    public enum Status {
+        Active, Inactive
     }
 
 }
