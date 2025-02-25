@@ -17,5 +17,6 @@ export class ProfileHeroComponent {
   name$ = this.userService.user$.pipe(map(user => user?.name));
   surname$ = this.userService.user$.pipe(map(user => user?.surname));
   email$ = this.userService.user$.pipe(map(user => user?.email));
+  role$ = this.userService.user$.pipe(map(user => user?.role));
 
 }
