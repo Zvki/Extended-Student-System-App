@@ -1,0 +1,30 @@
+package polsl.bartosz.sosnica.fullstack_backend.service;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import polsl.bartosz.sosnica.fullstack_backend.interfaces.EnrollmentInterfaces.IEnrollmentRepository;
+import polsl.bartosz.sosnica.fullstack_backend.interfaces.EnrollmentInterfaces.IEnrollmentService;
+import polsl.bartosz.sosnica.fullstack_backend.model.EnrollmentModel;
+import polsl.bartosz.sosnica.fullstack_backend.model.SubjectModel;
+import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
+
+@Service
+public class EnrollmentService implements IEnrollmentService {
+
+    @Autowired
+    private IEnrollmentRepository enrollmentRepository;
+
+    @Autowired
+    public EnrollmentService(IEnrollmentRepository enrollmentRepository) {
+        this.enrollmentRepository = enrollmentRepository;
+    }
+
+    
+    public EnrollmentModel enrollStudentToSubject(UserModel user, SubjectModel subject) {
+        EnrollmentModel enrollment = new EnrollmentModel();
+        enrollment.setUser(user);
+        enrollment.setSubject(subject);
+        return enrollmentRepository.save(enrollment);
+    }
+}
