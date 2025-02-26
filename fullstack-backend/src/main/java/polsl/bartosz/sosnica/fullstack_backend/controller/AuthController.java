@@ -14,7 +14,7 @@ import jakarta.validation.Validator;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestLoginDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.RequestRegisterDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.auth.ResponseAuthDTO;
-import polsl.bartosz.sosnica.fullstack_backend.interfaces.IAuthService;
+import polsl.bartosz.sosnica.fullstack_backend.interfaces.AuthInterfaces.IAuthService;
 import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
 import polsl.bartosz.sosnica.fullstack_backend.utils.JwtTokenUtil;
