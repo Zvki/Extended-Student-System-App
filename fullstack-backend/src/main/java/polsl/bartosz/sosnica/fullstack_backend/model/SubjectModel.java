@@ -27,6 +27,4 @@ public class SubjectModel {
     @Column(name = "name")
     private String name;
 
-    @OneToMany(mappedBy = "subject", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<EnrollmentModel> enrollments = new HashSet<>(); 
 }
