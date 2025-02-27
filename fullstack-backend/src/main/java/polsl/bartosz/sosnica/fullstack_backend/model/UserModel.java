@@ -56,9 +56,6 @@ public class UserModel {
     @Enumerated(EnumType.STRING)
     private Status status;
 
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
-    private Set<EnrollmentModel> enrollments = new HashSet<>();
-
     public UserModel(String password, String name, String surname, String email) {
         this.createdAt = LocalDateTime.now();
         this.password = password;
