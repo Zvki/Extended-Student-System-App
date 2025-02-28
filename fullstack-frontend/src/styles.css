@@ -9,6 +9,6 @@
     background-color: #4C585B;
     height: 100%;
     width: 100%; 
-    overflow: hidden; /* Usuń przewijanie */
+    overflow: auto; 
 
   }

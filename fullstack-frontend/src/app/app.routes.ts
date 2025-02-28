@@ -5,11 +5,13 @@ import { ProfilePageComponent } from './pages/profile-page/profile-page.componen
 import { LoadingPageComponent } from './pages/loading-page/loading-page.component';
 import { RegisterComponent } from './components/register/register.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
+import { GradesPageComponent } from './pages/grades-page/grades-page.component';
 
 export const routes: Routes = [
 { path: '', component: LandingPageComponent },
 { path: 'login', component: LoginPageComponent },
 { path: 'profile', component: ProfilePageComponent},
 { path: 'loading', component: LoadingPageComponent},
-{ path: 'register', component: RegisterPageComponent}
+{ path: 'register', component: RegisterPageComponent},
+{ path: 'grades', component: GradesPageComponent}
 ];
