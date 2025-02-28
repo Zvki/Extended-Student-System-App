@@ -1,22 +1,23 @@
 import { Component } from '@angular/core';
-import { Enrollment } from '../../utils/interfaces/EnrollmentInterfaces';
-import { HttpClient} from '@angular/common/http';
-import { UserService } from '../../utils/UserService';
 import { BehaviorSubject, map } from 'rxjs';
+import { Enrollment } from '../../../utils/interfaces/EnrollmentInterfaces';
+import { HttpClient } from '@angular/common/http';
+import { UserService } from '../../../utils/UserService';
 import { AsyncPipe, CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-grades-hero',
+  selector: 'app-enrolled-subjects',
   standalone: true,
   imports: [AsyncPipe, CommonModule],
-  templateUrl: './grades-hero.component.html',
-  styleUrl: './grades-hero.component.css'
+  templateUrl: './enrolled-subjects.component.html',
+  styleUrl: './enrolled-subjects.component.css'
 })
-export class GradesHeroComponent {
+export class EnrolledSubjectsComponent {
 
-  grades$ = new BehaviorSubject<Enrollment[]>([]);
+  enrollments$ = new BehaviorSubject<Enrollment[]>([]);
   id$ = this.userService.user$.pipe(map(user => user?.id));
   isLoading: boolean = true;
+  expandedEnrollments: { [key: number]: boolean } = {};
   placeholderItems = new Array(5);
 
   constructor(private http: HttpClient, private userService: UserService) {}
@@ -31,7 +32,7 @@ export class GradesHeroComponent {
         .subscribe({
           next: (response) => {
             console.log('Grades received', response)
-            this.grades$.next(response.data)
+            this.enrollments$.next(response.data)
             this.isLoading = false;
           },
           error: (error) => {
@@ -41,4 +42,7 @@ export class GradesHeroComponent {
     });}, 1500);
   }
 
+  toggleDescription(index: number): void {
+    this.expandedEnrollments[index] = !this.expandedEnrollments[index];
+  }
 }
