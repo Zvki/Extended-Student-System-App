@@ -13,8 +13,11 @@ public interface IEnrollmentRepository extends JpaRepository<EnrollmentModel, Lo
     
     boolean existsByUserIdAndSubjectId(Long userId, Long subjectId);
 
-    @Query("SELECT new polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.ResponseEnrollmentDTO(e.subject.name, COALESCE(e.grade, 0)) " +
-       "FROM EnrollmentModel e WHERE e.user.id = :userId")
+    @Query("SELECT new polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.ResponseEnrollmentDTO(" +
+    "e.subject.name, " +
+    "COALESCE(e.grade, 0), " +
+    "e.subject.description) " +
+    "FROM EnrollmentModel e WHERE e.user.id = :userId")
     List<ResponseEnrollmentDTO> findEnrollmentByUserId(@Param("userId")long userId);
 
 }
