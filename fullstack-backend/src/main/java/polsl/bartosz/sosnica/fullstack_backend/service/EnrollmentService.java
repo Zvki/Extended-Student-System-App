@@ -3,7 +3,6 @@ package polsl.bartosz.sosnica.fullstack_backend.service;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.ResponseEnrollmentDTO;
@@ -40,7 +39,7 @@ public class EnrollmentService implements IEnrollmentService {
         try{
             return enrollmentRepository.findEnrollmentByUserId(userId);
         }catch(Exception e){
-            e.printStackTrace();
+            System.out.println(e.getMessage());
             return null;
         }
     }

@@ -8,6 +8,7 @@ import org.springframework.data.repository.query.Param;
 
 import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.ResponseEnrollmentDTO;
 import polsl.bartosz.sosnica.fullstack_backend.model.EnrollmentModel;
+import polsl.bartosz.sosnica.fullstack_backend.model.SubjectModel;
 
 public interface IEnrollmentRepository extends JpaRepository<EnrollmentModel, Long> {
     

@@ -10,5 +10,7 @@ public interface ISubjectService {
     List<SubjectModel> getAllSubjects();
 
     Optional<SubjectModel> getSubjectById(Long id);
+
+    List<SubjectModel> findSubjectsNotEnrolledByUser(Long userId);
     
 }

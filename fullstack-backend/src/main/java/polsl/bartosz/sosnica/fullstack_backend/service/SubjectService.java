@@ -29,4 +29,12 @@ public class SubjectService implements ISubjectService {
         return subjectRepository.findById(id);
     }
     
+    public List<SubjectModel> findSubjectsNotEnrolledByUser(Long userId){
+        try {
+            return subjectRepository.findSubjectsNotEnrolledByUser(userId);
+        }catch(Exception e){
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }
