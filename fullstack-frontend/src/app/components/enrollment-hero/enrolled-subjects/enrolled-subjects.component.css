@@ -7,6 +7,7 @@
     background: linear-gradient(120deg, #1F1C2C, #928DAB);
     color: #E4F9F5;
     min-height: 100vh;
+    min-width: 100vw;
 }
 
 .dashboard-header {
@@ -73,7 +74,7 @@
 }
 
 .enrollment-item .toggle-button {
-    background-color: #007bff;
+    background-color: #466d94;
     color: white;
     border: none;
     padding: 5px 10px;

@@ -31,7 +31,7 @@ export class EnrolledSubjectsComponent {
       this.http.get<{ success: boolean; message: string; data: any }>(`http://localhost:8080/getenrollments/${id}`)
         .subscribe({
           next: (response) => {
-            console.log('Grades received', response)
+            console.log('Enrollments received', response)
             this.enrollments$.next(response.data)
             this.isLoading = false;
           },
