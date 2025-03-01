@@ -1,0 +1,16 @@
+
+    <div class="slider-container">
+        <div class="slides" [ngClass]="{ 'move-left': currentSlide === 'available' }">
+            <div class="slide">
+                <app-enrolled-subjects></app-enrolled-subjects>
+            </div>
+            <div class="slide">
+                <app-available-subjects></app-available-subjects>
+            </div>
+        </div>
+    </div>
+
+    <div class="buttons">
+        <button [class.active]="currentSlide === 'enrolled'" (click)="showEnrolled()">My Subjects</button>
+        <button [class.active]="currentSlide === 'available'" (click)="showAvailable()">Available Subjects</button>
+    </div>
