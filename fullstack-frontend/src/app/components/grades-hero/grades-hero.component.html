@@ -5,11 +5,8 @@
 
     <div class="grades-list">
         <ng-container *ngIf="isLoading">
-            <div  class="grade-item placeholder" *ngFor="let item of placeholderItems">
-                <span class="subject"></span>
-                <span class="score"></span>
-            </div>
-        </ng-container>
+            <app-subject-placeholder></app-subject-placeholder>
+        </ng-container> 
 
         <ng-container *ngIf="!isLoading">
             <div class="grade-item" *ngFor="let grade of grades$ | async">

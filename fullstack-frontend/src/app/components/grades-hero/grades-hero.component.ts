@@ -4,11 +4,12 @@ import { HttpClient} from '@angular/common/http';
 import { UserService } from '../../utils/UserService';
 import { BehaviorSubject, map } from 'rxjs';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { SubjectPlaceholderComponent } from '../subject-placeholder/subject-placeholder.component';
 
 @Component({
   selector: 'app-grades-hero',
   standalone: true,
-  imports: [AsyncPipe, CommonModule],
+  imports: [AsyncPipe, CommonModule, SubjectPlaceholderComponent],
   templateUrl: './grades-hero.component.html',
   styleUrl: './grades-hero.component.css'
 })
