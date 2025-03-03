@@ -5,24 +5,11 @@
 
     <div class="enrollments-list">
         <ng-container *ngIf="isLoading">
-            <div  class="enrollment-item placeholder" *ngFor="let item of placeholderItems">
-                <span class="subject"></span>
-                <span class="score"></span>
-            </div>
+            <app-subject-placeholder></app-subject-placeholder>
         </ng-container>
 
         <ng-container *ngIf="!isLoading">
-            <div class="enrollment-item" *ngFor="let enrollment of enrollments$ | async; let i = index">
-                <div class="header" (click)="toggleDescription(i)">
-                  <span class="subject">{{ enrollment.subjectName }}</span>
-                  <button class="toggle-button">
-                    {{ expandedEnrollments[i] ? '▲' : '▼' }}
-                  </button>
-                </div>
-                <div class="description" [class.expanded]="expandedEnrollments[i]">
-                  <p> {{ enrollment.description }} </p>
-                </div>
-              </div>
+            <app-enrollment-item [subjects$]="subjects$"></app-enrollment-item>
         </ng-container>
     </div>
 </div>
