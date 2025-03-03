@@ -10,7 +10,7 @@
 
         <ng-container *ngIf="!isLoading">
             <div class="grade-item" *ngFor="let grade of grades$ | async">
-                <span class="subject">{{ grade.subjectName }}</span>
+                <span class="subject">{{ grade.name }}</span>
                 <span class="score">{{ grade.grade }}</span>
             </div>
         </ng-container>

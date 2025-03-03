@@ -47,64 +47,7 @@
     width: 100%;
 }
 
-.enrollment-item {
-    background: rgba(255, 255, 255, 0.1);
-    padding: 15px 25px;
-    border-radius: 15px;
-    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
-    width: 50%;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-}
-
-.enrollment-item:hover {
-    transform: translateY(-5px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.5);
-}
-
-.enrollment-item .header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-}
-
-.enrollment-item .subject {
-    color: #A4EBF3;
-    font-weight: bold;
-    font-size: 20px;
-}
-
-.enrollment-item .toggle-button {
-    background-color: #466d94;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    transition: background-color 0.3s ease;
-}
-
-.enrollment-item .toggle-button:hover {
-    background-color: #0056b3;
-}
-
-.enrollment-item .description {
-    max-height: 0;
-    overflow: hidden;
-    transition: max-height 0.3s ease, padding 0.3s ease;
-    padding: 0 10px;
-    color: #E4F9F5;
-    font-size: 16px;
-    line-height: 1.6;
-}
-
-.enrollment-item .description.expanded {
-    max-height: 500px;
-    padding: 10px;
-}
-
-.enrollment-item .enroll-button {
+.enroll-button {
     background-color: #28a745;
     color: white;
     border: none;
@@ -116,9 +59,6 @@
     margin-top: 10px;
 }
 
-.enrollment-item .enroll-button:hover {
-    background-color: #218838;
-}
 
 @media (max-width: 768px) {
     .enrollment-item {

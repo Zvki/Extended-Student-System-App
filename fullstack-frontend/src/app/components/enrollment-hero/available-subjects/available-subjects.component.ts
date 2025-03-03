@@ -6,10 +6,11 @@ import { UserService } from '../../../utils/UserService';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { Subject } from '../../../utils/interfaces/SubjectInterface';
 import { SubjectPlaceholderComponent } from '../../subject-placeholder/subject-placeholder.component';
+import { EnrollmentItemComponent } from '../enrollment-item/enrollment-item.component';
 @Component({
   selector: 'app-available-subjects',
   standalone: true,
-  imports: [AsyncPipe, CommonModule, SubjectPlaceholderComponent],
+  imports: [AsyncPipe, CommonModule, SubjectPlaceholderComponent, EnrollmentItemComponent],
   templateUrl: './available-subjects.component.html',
   styleUrl: './available-subjects.component.css'
 })

@@ -1,6 +1,8 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, ContentChild, Input, TemplateRef } from '@angular/core';
+import { Observable} from 'rxjs';
+import { Subject } from '../../../utils/interfaces/SubjectInterface';
+import { Enrollment } from '../../../utils/interfaces/EnrollmentInterfaces';
 
 @Component({
   selector: 'app-enrollment-item',
@@ -10,7 +12,10 @@ import { Observable } from 'rxjs';
   styleUrl: './enrollment-item.component.css'
 })
 export class EnrollmentItemComponent {
-  @Input() subjects$: Observable<any[]> | undefined;  
+  @Input() subjects$: Observable<(Subject | Enrollment)[]> | undefined;
+
+  @ContentChild(TemplateRef) enrollButtonTemplate: TemplateRef<{subject: Subject}> | undefined;
+
   expandedEnrollments: boolean[] = [];
 
   toggleDescription(index: number): void {

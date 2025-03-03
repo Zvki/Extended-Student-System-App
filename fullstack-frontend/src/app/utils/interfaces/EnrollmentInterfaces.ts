@@ -1,5 +1,5 @@
 export interface Enrollment {
-    subjectName: string;
+    name: string;
     grade?: number;
     description: string;
 }
