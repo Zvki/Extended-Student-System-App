@@ -1,28 +1,19 @@
-<div class="landing-page">
-    <div class="dashboard-header">
+<app-base-layout>
+    <app-dashboard-header>
         <p>Available enrollments</p>
-    </div>
+    </app-dashboard-header>
 
     <div class="enrollments-list">
         <ng-container *ngIf="isLoading">
-            <div class="enrollment-item placeholder" *ngFor="let item of placeholderItems">
-                <span class="subject"></span>
-            </div>
+            <app-subject-placeholder></app-subject-placeholder>
         </ng-container>
 
         <ng-container *ngIf="!isLoading">
-            <div class="enrollment-item" *ngFor="let subject of subjects$ | async; let i = index">
-                <div class="header" (click)="toggleDescription(i)">
-                    <span class="subject">{{ subject.name }}</span>
-                    <button class="toggle-button">
-                        {{ expandedEnrollments[i] ? '▲' : '▼' }}
-                    </button>
-                </div>
-                <div class="description" [class.expanded]="expandedEnrollments[i]">
-                    <p>{{ subject.description }}</p>
+            <app-enrollment-item [subjects$]="subjects$">
+                <ng-template let-subject="subject">
                     <button class="enroll-button" (click)="enroll(subject.id)">Enroll</button>
-                </div>
-            </div>
+                </ng-template>
+            </app-enrollment-item>
         </ng-container>
     </div>
-</div>
+</app-base-layout>

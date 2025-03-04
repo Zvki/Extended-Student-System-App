@@ -8,9 +8,9 @@ import lombok.Setter;
 @Setter
 @AllArgsConstructor
 public class ResponseEnrollmentDTO {
-    
-    private String subjectName;
+
+    private String name;
     private double grade;
     private String description;
-    
+
 }

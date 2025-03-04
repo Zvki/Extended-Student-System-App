@@ -1,24 +1,27 @@
 import { Component } from '@angular/core';
-import { BehaviorSubject, map } from 'rxjs';
+import { BehaviorSubject, map, Observable } from 'rxjs';
 import { Enrollment } from '../../../utils/interfaces/EnrollmentInterfaces';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../../utils/UserService';
 import { AsyncPipe, CommonModule } from '@angular/common';
+import { SubjectPlaceholderComponent } from '../../subject-placeholder/subject-placeholder.component';
+import { EnrollmentItemComponent } from '../enrollment-item/enrollment-item.component';
+import { DashboardHeaderComponent } from '../../dashboard-header/dashboard-header.component';
+import { BaseLayoutComponent } from '../../base-layout/base-layout.component';
 
 @Component({
   selector: 'app-enrolled-subjects',
   standalone: true,
-  imports: [AsyncPipe, CommonModule],
+  imports: [AsyncPipe, CommonModule, SubjectPlaceholderComponent, EnrollmentItemComponent, DashboardHeaderComponent, BaseLayoutComponent],
   templateUrl: './enrolled-subjects.component.html',
   styleUrl: './enrolled-subjects.component.css'
 })
 export class EnrolledSubjectsComponent {
 
-  enrollments$ = new BehaviorSubject<Enrollment[]>([]);
+  subjects$: Observable<Enrollment[]> | undefined;
   id$ = this.userService.user$.pipe(map(user => user?.id));
   isLoading: boolean = true;
   expandedEnrollments: { [key: number]: boolean } = {};
-  placeholderItems = new Array(5);
 
   constructor(private http: HttpClient, private userService: UserService) {}
 
@@ -32,7 +35,7 @@ export class EnrolledSubjectsComponent {
         .subscribe({
           next: (response) => {
             console.log('Enrollments received', response)
-            this.enrollments$.next(response.data)
+            this.subjects$ = new BehaviorSubject<Enrollment[]>(response.data).asObservable();
             this.isLoading = false;
           },
           error: (error) => {

@@ -3,12 +3,13 @@ import { Router } from '@angular/router';
 import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { UserService } from '../../utils/UserService';
+import { BaseLayoutComponent } from '../base-layout/base-layout.component';
 
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [FormsModule, HttpClientModule],
+  imports: [FormsModule, HttpClientModule, BaseLayoutComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.css'
 })

@@ -1,42 +1,4 @@
-.landing-page {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 50px;
-    padding: 20px;
-    background: linear-gradient(120deg, #1F1C2C, #928DAB);
-    color: #E4F9F5;
-    min-height: 100vh;
-}
-
-.hero, .dashboard-header {
-    text-align: center;
-    padding: 60px 20px;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-}
-
-.hero:hover, .dashboard-header:hover {
-    transform: scale(1.05);
-}
-
-.hero h2, .dashboard-header h2 {
-    font-size: 48px;
-    margin-bottom: 20px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-}
-
-.hero p, .dashboard-header p {
-    font-size: 18px;
-    margin: 10px 0;
-    line-height: 1.6;
-}
-
-.hero button, .action-card {
+.action-card {
     background: linear-gradient(90deg, #6DD5FA, #2980B9);
     color: #fff;
     border: none;
@@ -47,7 +9,7 @@
     transition: background 0.7s ease-in-out, transform 0.7s ease-in-out;
 }
 
-.hero button:hover, .action-card:hover {
+.action-card:hover {
     background: linear-gradient(90deg, #2980B9, #6DD5FA);
     transform: translateY(-3px);
     transition: background 10s ease-in-out, transform 1s ease-in-out;
@@ -94,7 +56,6 @@
     cursor: pointer;
 }
 
-/* Stylizacja sekcji szybkich akcji */
 .quick-actions {
     margin-bottom: 2rem;
     text-align: center;
@@ -106,7 +67,6 @@
     margin-bottom: 20px;
 }
 
-/* Dostosowanie do responsywności */
 @media (max-width: 768px) {
     .features, .action-grid {
         flex-direction: column;
