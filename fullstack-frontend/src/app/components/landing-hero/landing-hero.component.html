@@ -1,4 +1,4 @@
-<div class="landing-page">
+<app-base-layout>
     <div *ngIf="!(isLoggedIn$ | async)">
     <app-dashboard-header>
         <h2>Welcome to ESS</h2>
@@ -47,4 +47,4 @@
             </section>
         </section>
     </div>
-</div>
+</app-base-layout>

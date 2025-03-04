@@ -1,0 +1,10 @@
+.base-layout {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 50px;
+    padding: 20px;
+    background: linear-gradient(120deg, #1F1C2C, #928DAB);
+    color: #E4F9F5;
+    min-height: 100vh;
+}

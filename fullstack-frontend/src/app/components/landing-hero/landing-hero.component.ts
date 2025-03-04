@@ -5,11 +5,12 @@ import { UserService } from '../../utils/UserService';
 import { RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 import { DashboardHeaderComponent } from '../dashboard-header/dashboard-header.component';
+import { BaseLayoutComponent } from '../base-layout/base-layout.component';
 
 @Component({
   selector: 'app-landing-hero',
   standalone: true,
-  imports: [NgIf, AsyncPipe, RouterLink, DashboardHeaderComponent],
+  imports: [NgIf, AsyncPipe, RouterLink, DashboardHeaderComponent, BaseLayoutComponent],
   templateUrl: './landing-hero.component.html',
   styleUrl: './landing-hero.component.css'
 })

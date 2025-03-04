@@ -8,10 +8,11 @@ import { Subject } from '../../../utils/interfaces/SubjectInterface';
 import { SubjectPlaceholderComponent } from '../../subject-placeholder/subject-placeholder.component';
 import { EnrollmentItemComponent } from '../enrollment-item/enrollment-item.component';
 import { DashboardHeaderComponent } from '../../dashboard-header/dashboard-header.component';
+import { BaseLayoutComponent } from '../../base-layout/base-layout.component';
 @Component({
   selector: 'app-available-subjects',
   standalone: true,
-  imports: [AsyncPipe, CommonModule, SubjectPlaceholderComponent, EnrollmentItemComponent, DashboardHeaderComponent],
+  imports: [AsyncPipe, CommonModule, SubjectPlaceholderComponent, EnrollmentItemComponent, DashboardHeaderComponent, BaseLayoutComponent],
   templateUrl: './available-subjects.component.html',
   styleUrl: './available-subjects.component.css'
 })

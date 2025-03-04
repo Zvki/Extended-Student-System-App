@@ -3,11 +3,12 @@ import { UserService } from '../../utils/UserService';
 import { map } from 'rxjs';
 import { AsyncPipe } from '@angular/common';
 import { DashboardHeaderComponent } from '../dashboard-header/dashboard-header.component';
+import { BaseLayoutComponent } from '../base-layout/base-layout.component';
 
 @Component({
   selector: 'app-profile-hero',
   standalone: true,
-  imports: [AsyncPipe, DashboardHeaderComponent],
+  imports: [AsyncPipe, DashboardHeaderComponent, BaseLayoutComponent],
   templateUrl: './profile-hero.component.html',
   styleUrl: './profile-hero.component.css'
 })
