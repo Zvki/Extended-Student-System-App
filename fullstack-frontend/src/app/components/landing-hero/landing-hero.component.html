@@ -1,10 +1,10 @@
 <div class="landing-page">
     <div *ngIf="!(isLoggedIn$ | async)">
-    <div class="hero">
+    <app-dashboard-header>
         <h2>Welcome to ESS</h2>
         <p>Your ultimate solution for managing student and academic data efficiently.</p>
         <button routerLink="/register">Get Started</button>
-    </div>
+    </app-dashboard-header>
     <section class="quick-actions">
         <h3>Quick Info</h3>
     <section class="features">
@@ -24,10 +24,10 @@
     </section>
     </div>
     <div *ngIf="isLoggedIn$ | async">
-        <header class="hero">
+        <app-dashboard-header>
             <h2>Welcome back, {{ name$ | async}}!</h2>
             <p>Manage your academic records and stay on top of your progress.</p>
-        </header>
+        </app-dashboard-header>
     
         <section class="quick-actions">
             <h3>Quick Actions</h3>

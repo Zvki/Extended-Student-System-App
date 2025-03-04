@@ -9,33 +9,6 @@
     min-height: 100vh;
 }
 
-.hero, .dashboard-header {
-    text-align: center;
-    padding: 60px 20px;
-    background: rgba(0, 0, 0, 0.4);
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
-    transition: transform 0.3s ease;
-}
-
-.hero:hover, .dashboard-header:hover {
-    transform: scale(1.05);
-}
-
-.hero h2, .dashboard-header h2 {
-    font-size: 48px;
-    margin-bottom: 20px;
-    font-weight: 700;
-    letter-spacing: 1px;
-    text-shadow: 0 3px 5px rgba(0, 0, 0, 0.5);
-}
-
-.hero p, .dashboard-header p {
-    font-size: 18px;
-    margin: 10px 0;
-    line-height: 1.6;
-}
-
 .hero button, .action-card {
     background: linear-gradient(90deg, #6DD5FA, #2980B9);
     color: #fff;
