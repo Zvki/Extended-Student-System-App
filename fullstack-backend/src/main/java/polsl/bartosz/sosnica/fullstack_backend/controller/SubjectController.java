@@ -16,21 +16,20 @@ import polsl.bartosz.sosnica.fullstack_backend.service.SubjectService;
 @RestController
 public class SubjectController {
 
-    @Autowired
     private ISubjectService subjectService;
 
     @Autowired
-    public SubjectController(SubjectService subjectService){
+    public SubjectController(SubjectService subjectService) {
         this.subjectService = subjectService;
     }
 
     @GetMapping("/usersavailablesubjects/{userId}")
-    public ResponseEntity<?> findSubjectNotEnrolledByUser(@PathVariable Long userId){
+    public ResponseEntity<?> findSubjectNotEnrolledByUser(@PathVariable Long userId) {
 
         var result = subjectService.findSubjectsNotEnrolledByUser(userId);
 
-        if(result == null){
-            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "No data provided", null, null );
+        if (result == null) {
+            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "No data provided", null, null);
             return ResponseEntity.badRequest().body(apiResponse);
         }
 
@@ -39,6 +38,5 @@ public class SubjectController {
         return ResponseEntity.ok(correctResponse);
 
     }
-    
-    
+
 }
