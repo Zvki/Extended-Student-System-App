@@ -13,7 +13,6 @@ import polsl.bartosz.sosnica.fullstack_backend.model.SubjectModel;
 @Service
 public class SubjectService implements ISubjectService {
 
-    @Autowired
     private ISubjectRepository subjectRepository;
 
     @Autowired
@@ -28,11 +27,11 @@ public class SubjectService implements ISubjectService {
     public Optional<SubjectModel> getSubjectById(Long id) {
         return subjectRepository.findById(id);
     }
-    
-    public List<SubjectModel> findSubjectsNotEnrolledByUser(Long userId){
+
+    public List<SubjectModel> findSubjectsNotEnrolledByUser(Long userId) {
         try {
             return subjectRepository.findSubjectsNotEnrolledByUser(userId);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }

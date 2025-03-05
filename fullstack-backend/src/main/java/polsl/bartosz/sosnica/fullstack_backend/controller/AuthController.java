@@ -26,7 +26,6 @@ public class AuthController {
     @Autowired
     private Validator validator;
 
-    @Autowired
     private final IAuthService authService;
 
     @Autowired

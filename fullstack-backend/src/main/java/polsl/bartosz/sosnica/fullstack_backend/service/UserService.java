@@ -12,17 +12,41 @@ import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 @Service
 public class UserService implements IUserService {
 
-    @Autowired
     private IUserRepository userRepository;
 
     @Autowired
     public UserService(IUserRepository userRepository) {
         this.userRepository = userRepository;
     }
-    
 
     public Optional<UserModel> getUserById(Long id) {
-        return userRepository.findById(id);
+        try {
+            return userRepository.findById(id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
     }
-    
+
+    public String findPasswordById(Long userId) {
+        try {
+            return userRepository.findPasswordById(userId);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
+    }
+
+    public Boolean updatePassword(Long userId, String newPassword) {
+        try {
+            userRepository.updatePassword(userId, newPassword);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
 }
