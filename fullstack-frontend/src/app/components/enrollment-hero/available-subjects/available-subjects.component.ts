@@ -37,8 +37,7 @@ export class AvailableSubjectsComponent {
         })
       })
   }
-  
-  
+
   ngOnInit(): void {
 
     this.getEnrollments();

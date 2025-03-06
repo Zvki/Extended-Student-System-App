@@ -12,4 +12,6 @@ public interface IUserService {
 
     Boolean updatePassword(Long userId, String newPassword);
 
+    Boolean updateUser(Long userId, String name, String surname, String email);
+
 }

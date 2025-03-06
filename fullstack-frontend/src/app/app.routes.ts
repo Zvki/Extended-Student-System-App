@@ -3,11 +3,11 @@ import { LoginPageComponent } from './pages/login-page/login-page.component';
 import { LandingPageComponent } from './pages/landing-page/landing-page.component';
 import { ProfilePageComponent } from './pages/profile-page/profile-page.component';
 import { LoadingPageComponent } from './pages/loading-page/loading-page.component';
-import { RegisterComponent } from './components/register/register.component';
 import { RegisterPageComponent } from './pages/register-page/register-page.component';
 import { GradesPageComponent } from './pages/grades-page/grades-page.component';
 import { EnrollmentPageComponent } from './pages/enrollment-page/enrollment-page.component';
 import { ChangePasswordPageComponent } from './pages/change-password-page/change-password-page.component';
+import { EditProfilePageComponent } from './pages/edit-profile-page/edit-profile-page.component';
 
 export const routes: Routes = [
 { path: '', component: LandingPageComponent },
@@ -17,5 +17,6 @@ export const routes: Routes = [
 { path: 'register', component: RegisterPageComponent},
 { path: 'grades', component: GradesPageComponent},
 { path: 'enrollments', component: EnrollmentPageComponent},
-{ path: 'changepasswd', component: ChangePasswordPageComponent}
+{ path: 'changepasswd', component: ChangePasswordPageComponent},
+{ path: 'editprofile', component: EditProfilePageComponent}
 ];

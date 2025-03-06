@@ -49,4 +49,14 @@ public class UserService implements IUserService {
         }
     }
 
+    public Boolean updateUser(Long userId, String name, String surname, String email) {
+        try {
+            userRepository.updateUser(userId, name, surname, email);
+            return true;
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return false;
+        }
+    }
+
 }

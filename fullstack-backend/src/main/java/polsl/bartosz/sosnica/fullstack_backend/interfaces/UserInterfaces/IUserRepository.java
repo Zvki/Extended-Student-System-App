@@ -22,4 +22,10 @@ public interface IUserRepository extends JpaRepository<UserModel, Long> {
     @Query("UPDATE UserModel u SET u.password = :password WHERE u.id = :userId")
     void updatePassword(@Param("userId") Long userId, @Param("password") String newPassword);
 
+    @Transactional
+    @Modifying
+    @Query("UPDATE UserModel u SET u.name = :name, u.surname = :surname, u.email = :email WHERE u.id = :userId")
+    void updateUser(@Param("userId") Long userId, @Param("name") String name, @Param("surname") String surname,
+            @Param("email") String email);
+
 }
