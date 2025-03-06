@@ -9,18 +9,20 @@ import polsl.bartosz.sosnica.fullstack_backend.interfaces.AuthInterfaces.IAuthRe
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.AuthInterfaces.IAuthService;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+import org.springframework.security.crypto.password.PasswordEncoder;
+
 import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 
 @Service
 public class AuthService implements IAuthService {
 
-    @Autowired
-    IAuthRepository authRepository;
+    private IAuthRepository authRepository;
+    private PasswordEncoder passwordEncoder;
 
     @Autowired
-    public AuthService(IAuthRepository authRepository) {
+    public AuthService(IAuthRepository authRepository, PasswordEncoder passwordEncoder) {
         this.authRepository = authRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
     public ResponseAuthDTO login(RequestLoginDTO loginData) {
@@ -31,9 +33,7 @@ public class AuthService implements IAuthService {
             return null;
         }
 
-        BCryptPasswordEncoder BCryptPasswordEncoder = new BCryptPasswordEncoder();
-
-        if (!BCryptPasswordEncoder.matches(loginData.getPassword(), user.getPassword())) {
+        if (!passwordEncoder.matches(loginData.getPassword(), user.getPassword())) {
             return null;
         }
 
@@ -56,9 +56,7 @@ public class AuthService implements IAuthService {
             return null;
         }
 
-        BCryptPasswordEncoder BCryptPasswordEncoder = new BCryptPasswordEncoder();
-
-        UserModel newUser = new UserModel(BCryptPasswordEncoder.encode(registerData.getPassword()),
+        UserModel newUser = new UserModel(passwordEncoder.encode(registerData.getPassword()),
                 registerData.getName(),
                 registerData.getSurname(),
                 registerData.getEmail());

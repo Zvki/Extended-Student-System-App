@@ -1,6 +1,5 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { Enrollment } from '../../../utils/interfaces/EnrollmentInterfaces';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../../utils/UserService';
 import { AsyncPipe, CommonModule } from '@angular/common';
@@ -38,8 +37,7 @@ export class AvailableSubjectsComponent {
         })
       })
   }
-  
-  
+
   ngOnInit(): void {
 
     this.getEnrollments();

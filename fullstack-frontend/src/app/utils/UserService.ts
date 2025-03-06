@@ -16,10 +16,12 @@ export class UserService {
   }
 
   setUser(userData: any): void {
+    console.log('Before save: ', userData)
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.setItem('user', JSON.stringify(userData));
     }
     this.userSubject.next(userData);
+    console.log('After save: ', userData)
   }
 
   getUser(): any {

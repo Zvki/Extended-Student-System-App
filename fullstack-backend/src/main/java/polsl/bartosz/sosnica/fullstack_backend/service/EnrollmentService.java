@@ -15,7 +15,6 @@ import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 @Service
 public class EnrollmentService implements IEnrollmentService {
 
-    @Autowired
     private IEnrollmentRepository enrollmentRepository;
 
     @Autowired
@@ -23,7 +22,6 @@ public class EnrollmentService implements IEnrollmentService {
         this.enrollmentRepository = enrollmentRepository;
     }
 
-    
     public EnrollmentModel enrollStudentToSubject(UserModel user, SubjectModel subject) {
         EnrollmentModel enrollment = new EnrollmentModel();
         enrollment.setUser(user);
@@ -31,14 +29,14 @@ public class EnrollmentService implements IEnrollmentService {
         return enrollmentRepository.save(enrollment);
     }
 
-    public boolean existsByUserIdAndSubjectId(UserModel user, SubjectModel subject ){
+    public boolean existsByUserIdAndSubjectId(UserModel user, SubjectModel subject) {
         return enrollmentRepository.existsByUserIdAndSubjectId(user.getId(), subject.getId());
     }
 
-    public List<ResponseEnrollmentDTO> findEnrollmentByUserId(long userId){
-        try{
+    public List<ResponseEnrollmentDTO> findEnrollmentByUserId(long userId) {
+        try {
             return enrollmentRepository.findEnrollmentByUserId(userId);
-        }catch(Exception e){
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
