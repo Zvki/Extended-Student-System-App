@@ -11,6 +11,7 @@ footer {
     box-shadow: 0 -4px 8px rgba(0, 0, 0, 0.3);
     z-index: 100;
     transition: transform 0.3s ease, opacity 0.3s ease;
+    width: 100vw;
 }
 
 
