@@ -20,6 +20,33 @@ import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
 import polsl.bartosz.sosnica.fullstack_backend.utils.MyValidationUtils;
 
+/**
+ * Controller class responsible for managing user-related operations, such as
+ * changing passwords
+ * and updating user profile information. This controller handles requests
+ * related to user account
+ * management and ensures proper validation of input data before performing any
+ * updates.
+ * 
+ * <p>
+ * Endpoints provided by this controller allow users to update their password
+ * and modify their
+ * profile details, such as name, surname, and email. The controller integrates
+ * with the user service
+ * to fetch and update user data securely, ensuring validation through the use
+ * of Jakarta Bean Validation.
+ * 
+ * <p>
+ * All endpoints return standardized API responses indicating success or
+ * failure, along with
+ * appropriate messages and validation error details if applicable.
+ * 
+ * <p>
+ * Security considerations include ensuring that password changes require
+ * validation of the current
+ * password and that new passwords match confirmation fields before being
+ * updated.
+ */
 @RestController
 public class UserController {
 
@@ -30,12 +57,27 @@ public class UserController {
 
     private PasswordEncoder passwordEncoder;
 
+    /**
+     * Constructs the UserController with required dependencies.
+     * 
+     * @param userService     the service responsible for user-related operations
+     * @param passwordEncoder the encoder used to securely hash passwords
+     */
     @Autowired
     public UserController(IUserService userService, PasswordEncoder passwordEncoder) {
         this.userService = userService;
         this.passwordEncoder = passwordEncoder;
     }
 
+    /**
+     * Endpoint for changing the password of a user.
+     * 
+     * @param passwdChange the request body containing the current and new password
+     *                     details
+     * @param userId       the ID of the user whose password is to be changed
+     * @return ResponseEntity indicating success or failure of the password update
+     *         operation
+     */
     @PatchMapping("/changepasswd/{userId}")
     public ResponseEntity<?> ChangePasswd(@RequestBody RequestChPasswdDTO passwdChange, @PathVariable Long userId) {
 
@@ -75,6 +117,13 @@ public class UserController {
         return ResponseEntity.ok(correctResponse);
     }
 
+    /**
+     * Endpoint for updating the profile details of a user.
+     * 
+     * @param userId      the ID of the user whose profile is to be updated
+     * @param editProfile the request body containing the new profile details
+     * @return ResponseEntity indicating success or failure of the update operation
+     */
     @PatchMapping("/editprofile/{userId}")
     public ResponseEntity<?> EditProfile(@PathVariable Long userId, @RequestBody RequestEditProfileDTO editProfile) {
 

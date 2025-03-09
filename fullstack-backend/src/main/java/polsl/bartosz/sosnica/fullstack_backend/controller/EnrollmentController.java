@@ -19,6 +19,16 @@ import polsl.bartosz.sosnica.fullstack_backend.model.SubjectModel;
 import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
 
+/**
+ * Controller responsible for handling student enrollment operations.
+ * 
+ * <p>
+ * This controller provides endpoints for enrolling students into subjects and
+ * retrieving enrollment details based on user ID.
+ * </p>
+ * 
+ * @author Bartosz Sosnica
+ */
 @RestController
 public class EnrollmentController {
 
@@ -28,6 +38,13 @@ public class EnrollmentController {
 
     private ISubjectService subjectService;
 
+    /**
+     * Constructs an EnrollmentController with the necessary service dependencies.
+     * 
+     * @param enrollmentService the service handling enrollment operations
+     * @param userService       the service managing user-related operations
+     * @param subjectService    the service managing subject-related operations
+     */
     @Autowired
     public EnrollmentController(IEnrollmentService enrollmentService, IUserService userService,
             ISubjectService subjectService) {
@@ -36,6 +53,18 @@ public class EnrollmentController {
         this.subjectService = subjectService;
     }
 
+    /**
+     * Enrolls a student in a subject.
+     * 
+     * <p>
+     * This method checks if the specified user and subject exist, verifies that the
+     * user is not already enrolled, and then proceeds with the enrollment process.
+     * </p>
+     * 
+     * @param userId    the ID of the user to be enrolled
+     * @param subjectId the ID of the subject to enroll the user in
+     * @return a {@code ResponseEntity} containing the enrollment result or an error message
+     */
     @PostMapping("{userId}/enroll/{subjectId}")
     public ResponseEntity<?> enrollStudentToSubject(@PathVariable Long userId, @PathVariable Long subjectId) {
 
@@ -73,6 +102,16 @@ public class EnrollmentController {
         return ResponseEntity.ok(correctResponse);
     }
 
+    /**
+     * Retrieves all enrollments for a given user.
+     * 
+     * <p>
+     * This method fetches all subjects that a user is enrolled in based on their user ID.
+     * </p>
+     * 
+     * @param userId the ID of the user whose enrollments are to be retrieved
+     * @return a {@code ResponseEntity} containing a list of enrollments or an error message
+     */
     @GetMapping("/getenrollments/{userId}")
     public ResponseEntity<?> findEnrollmentByUserId(@PathVariable Long userId) {
 

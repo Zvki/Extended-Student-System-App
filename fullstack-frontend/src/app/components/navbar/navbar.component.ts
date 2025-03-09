@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../utils/AuthService';
 import { NgIf, AsyncPipe } from '@angular/common';
 
@@ -14,10 +14,11 @@ export class NavbarComponent {
 
   isLoggedIn$ = this.authService.isLoggedIn$;
 
-  constructor(private authService: AuthService) {}
+  constructor(private authService: AuthService, private router: Router) {}
 
   logout(): void {
     this.authService.logout();
+    this.router.navigate([""])
   }
 
 }

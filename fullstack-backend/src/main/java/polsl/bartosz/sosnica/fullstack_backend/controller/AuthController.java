@@ -20,6 +20,18 @@ import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
 import polsl.bartosz.sosnica.fullstack_backend.utils.JwtTokenUtil;
 import polsl.bartosz.sosnica.fullstack_backend.utils.MyValidationUtils;
 
+/**
+ * Controller responsible for handling authentication-related operations,
+ * including user login and registration.
+ * 
+ * <p>
+ * This controller provides endpoints for user authentication using JWT tokens.
+ * It validates input data, processes authentication logic through the
+ * {@code IAuthService} interface, and responds with appropriate messages.
+ * </p>
+ *
+ * @author Bartosz Sosnica
+ */
 @RestController
 public class AuthController {
 
@@ -28,11 +40,29 @@ public class AuthController {
 
     private final IAuthService authService;
 
+    /**
+     * Constructs an AuthController with the specified authentication service.
+     * 
+     * @param authService the authentication service implementation
+     */
     @Autowired
     public AuthController(IAuthService authService) {
         this.authService = authService;
     }
 
+    /**
+     * Handles user login requests.
+     * 
+     * <p>
+     * This method validates user input, attempts authentication through the
+     * authentication service, and generates a JWT token if the login is successful.
+     * If authentication fails, an appropriate response is returned.
+     * </p>
+     * 
+     * @param loginData the login request data containing username and password
+     * @param response  the HTTP servlet response, used to set authentication cookies
+     * @return a {@code ResponseEntity} containing authentication result or validation errors
+     */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody RequestLoginDTO loginData, HttpServletResponse response) {
 
@@ -76,6 +106,18 @@ public class AuthController {
         return ResponseEntity.ok(correctResponse);
     }
 
+    /**
+     * Handles user registration requests.
+     * 
+     * <p>
+     * This method validates user input, attempts to register a new user through the
+     * authentication service, and returns an appropriate response. If registration
+     * is successful, a success message is returned.
+     * </p>
+     * 
+     * @param registerData the registration request data containing user details
+     * @return a {@code ResponseEntity} containing registration result or validation errors
+     */
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RequestRegisterDTO registerData) {
 
