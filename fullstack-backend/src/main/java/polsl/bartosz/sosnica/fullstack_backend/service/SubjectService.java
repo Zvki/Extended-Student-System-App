@@ -10,22 +10,44 @@ import polsl.bartosz.sosnica.fullstack_backend.interfaces.SubjectInterfaces.ISub
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.SubjectInterfaces.ISubjectService;
 import polsl.bartosz.sosnica.fullstack_backend.model.SubjectModel;
 
+/**
+ * Service class responsible for handling subject-related operations.
+ * Implements the {@link ISubjectService} interface.
+ */
 @Service
 public class SubjectService implements ISubjectService {
 
     private ISubjectRepository subjectRepository;
 
+    /**
+     * Constructor for SubjectService.
+     *
+     * @param subjectRepository the repository for subject-related database
+     *                          operations
+     */
     @Autowired
     public SubjectService(ISubjectRepository subjectRepository) {
         this.subjectRepository = subjectRepository;
     }
 
     public List<SubjectModel> getAllSubjects() {
-        return subjectRepository.findAll();
+        try {
+            return subjectRepository.findAll();
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
     }
 
     public Optional<SubjectModel> getSubjectById(Long id) {
-        return subjectRepository.findById(id);
+        try {
+            return subjectRepository.findById(id);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+
     }
 
     public List<SubjectModel> findSubjectsNotEnrolledByUser(Long userId) {

@@ -3,8 +3,8 @@
         <a routerLink="/">ESS</a>
     </div>
     <nav class="nav-links">
-        <a routerLink="">About</a>
-        <a routerLink="">Contact</a>
+        <a href="https://github.com/Zvki/Extended-Student-System-App/blob/TSP/README.md" target="_blank">About</a>
+        <a href="https://github.com/Zvki" target="_blank">Contact</a>
         <a *ngIf="!(isLoggedIn$ | async)" routerLink="/login">Sign In</a>
         <a *ngIf="isLoggedIn$ | async" routerLink="/profile">Profile</a>
         <a *ngIf="isLoggedIn$ | async" (click)="logout()" style="cursor: pointer">Logout</a>

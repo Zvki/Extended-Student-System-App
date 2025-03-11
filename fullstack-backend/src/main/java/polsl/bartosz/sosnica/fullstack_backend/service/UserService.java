@@ -9,11 +9,20 @@ import polsl.bartosz.sosnica.fullstack_backend.interfaces.UserInterfaces.IUserRe
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.UserInterfaces.IUserService;
 import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 
+/**
+ * Service class responsible for handling user-related operations.
+ * Implements the {@link IUserService} interface.
+ */
 @Service
 public class UserService implements IUserService {
 
     private IUserRepository userRepository;
 
+    /**
+     * Constructor for UserService.
+     *
+     * @param userRepository the repository for user-related database operations
+     */
     @Autowired
     public UserService(IUserRepository userRepository) {
         this.userRepository = userRepository;
