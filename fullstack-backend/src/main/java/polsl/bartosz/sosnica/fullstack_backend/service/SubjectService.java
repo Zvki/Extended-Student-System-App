@@ -4,6 +4,7 @@ import java.util.List;
 import java.util.Optional;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Service;
 
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.SubjectInterfaces.ISubjectRepository;
@@ -53,6 +54,15 @@ public class SubjectService implements ISubjectService {
     public List<SubjectModel> findSubjectsNotEnrolledByUser(Long userId) {
         try {
             return subjectRepository.findSubjectsNotEnrolledByUser(userId);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
+
+    public List<SubjectModel> findSubjectsTeachByUser(Long userId) {
+        try {
+            return subjectRepository.findSubjectsTeachByUser(userId);
         } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;

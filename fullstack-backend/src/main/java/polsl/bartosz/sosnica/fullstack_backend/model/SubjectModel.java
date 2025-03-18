@@ -30,5 +30,4 @@ public class SubjectModel {
     @ManyToOne()
     @JoinColumn(name = "user_id")
     private UserModel user;
-
 }

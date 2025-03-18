@@ -33,4 +33,7 @@ public interface ISubjectRepository extends JpaRepository<SubjectModel, Long> {
             "(SELECT e FROM EnrollmentModel e WHERE e.subject.id = s.id AND e.user.id = :userId)")
     List<SubjectModel> findSubjectsNotEnrolledByUser(@Param("userId") Long userId);
 
+    @Query("SELECT s FROM SubjectModel s WHERE s.user.id = :userId")
+    List<SubjectModel> findSubjectsTeachByUser(@Param("userId") Long userId);
+
 }
