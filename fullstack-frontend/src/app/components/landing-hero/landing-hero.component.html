@@ -24,27 +24,47 @@
     </section>
     </div>
     <div *ngIf="isLoggedIn$ | async">
-        <app-dashboard-header>
-            <h2>Welcome back, {{ name$ | async}}!</h2>
-            <p>Manage your academic records and stay on top of your progress.</p>
-        </app-dashboard-header>
-    
-        <section class="quick-actions">
-            <h3>Quick Actions</h3>
-            <section class="features">
-                <button class="feature-card" routerLink="/profile">
-                    <h3>Profile</h3>
-                    <p>View and update your personal details.</p>
-                </button>
-                <button class="feature-card" routerLink="/enrollments">
-                    <h3>My Courses</h3>
-                    <p>Access enrolled courses and resources.</p>
-                </button>
-                <button class="feature-card" routerLink="/grades">
-                    <h3>Grades</h3>
-                    <p>Check your academic performance.</p>
-                </button>
+        <ng-container *ngIf="isStudent$ | async ">
+            <app-dashboard-header>
+                <h2>Welcome back, {{ name$ | async}}!</h2>
+                <p>Manage your academic records and stay on top of your progress.</p>
+            </app-dashboard-header>
+            <section class="quick-actions">
+                <h3>Quick Actions</h3>
+                <section class="features">
+                    <button class="feature-card" routerLink="/profile">
+                        <h3>Profile</h3>
+                        <p>View and update your personal details.</p>
+                    </button>
+                    <button class="feature-card" routerLink="/enrollments">
+                        <h3>My Courses</h3>
+                        <p>Access enrolled courses and resources.</p>
+                    </button>
+                    <button class="feature-card" routerLink="/grades">
+                        <h3>Grades</h3>
+                        <p>Check your academic performance.</p>
+                    </button>
+                </section>
             </section>
-        </section>
+        </ng-container>
+        <ng-container *ngIf="isTeacher$ | async ">
+            <app-dashboard-header>
+                <h2>Welcome back, {{ name$ | async}}!</h2>
+                <p>Manage your courses, students, and academic responsibilities.</p>
+            </app-dashboard-header>
+            <section class="quick-actions">
+                <h3>Quick Actions</h3>
+                <section class="features">
+                    <button class="feature-card" routerLink="/courses">
+                        <h3>My Courses</h3>
+                        <p>View and manage the courses you teach.</p>
+                    </button>
+                    <button class="feature-card" routerLink="/grade-submissions">
+                        <h3>Grade Submissions</h3>
+                        <p>Review and grade student assignments.</p>
+                    </button>
+                </section>
+            </section>
+        </ng-container>
     </div>
 </app-base-layout>

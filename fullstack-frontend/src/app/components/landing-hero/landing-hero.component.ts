@@ -18,6 +18,10 @@ export class LandingHeroComponent {
 
   isLoggedIn$ = this.AuthService.isLoggedIn$;
   name$ = this.userService.user$.pipe(map(user => user?.name));
+  role$ = this.userService.user$.pipe(map(user => user?.role))
+
+  isStudent$ = this.role$.pipe(map(role => role === 'Student'))
+  isTeacher$ = this.role$.pipe(map(role => role === 'Teacher'))
 
   constructor(private AuthService: AuthService, private userService: UserService) {}
 
