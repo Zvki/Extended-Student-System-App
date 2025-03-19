@@ -35,5 +35,4 @@ public interface ISubjectRepository extends JpaRepository<SubjectModel, Long> {
 
     @Query("SELECT s FROM SubjectModel s WHERE s.user.id = :userId")
     List<SubjectModel> findSubjectsTeachByUser(@Param("userId") Long userId);
-
 }

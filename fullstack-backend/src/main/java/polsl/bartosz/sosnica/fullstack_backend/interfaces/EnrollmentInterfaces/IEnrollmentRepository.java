@@ -37,4 +37,8 @@ public interface IEnrollmentRepository extends JpaRepository<EnrollmentModel, Lo
             "FROM EnrollmentModel e WHERE e.user.id = :userId")
     List<ResponseEnrollmentDTO> findEnrollmentByUserId(@Param("userId") long userId);
 
+    @Query("SELECT e FROM EnrollmentModel e WHERE e.user.id = :userId AND e.subject.id = :subjectId")
+    EnrollmentModel findByUserIdAndSubjectId(@Param("userId") Long userId, @Param("subjectId") Long subjectId);
+
+
 }
