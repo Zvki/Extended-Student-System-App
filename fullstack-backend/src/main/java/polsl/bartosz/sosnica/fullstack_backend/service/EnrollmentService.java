@@ -1,16 +1,24 @@
 package polsl.bartosz.sosnica.fullstack_backend.service;
 
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import jakarta.validation.ConstraintViolation;
+import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.RequestAssignGradeDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.ResponseEnrollmentDTO;
+import polsl.bartosz.sosnica.fullstack_backend.dto.user.RequestChPasswdDTO;
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.EnrollmentInterfaces.IEnrollmentRepository;
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.EnrollmentInterfaces.IEnrollmentService;
 import polsl.bartosz.sosnica.fullstack_backend.model.EnrollmentModel;
 import polsl.bartosz.sosnica.fullstack_backend.model.SubjectModel;
 import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
+import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
+import polsl.bartosz.sosnica.fullstack_backend.utils.MyValidationUtils;
 
 /**
  * Service class for managing enrollments of students in subjects.
@@ -61,5 +69,21 @@ public class EnrollmentService implements IEnrollmentService {
             System.out.println(e.getMessage());
             return null;
         }
+    }
+
+    public EnrollmentModel assignGrade(RequestAssignGradeDTO assignGradeParams) {
+
+        try{
+            EnrollmentModel enrollment = enrollmentRepository.findByUserIdAndSubjectId(assignGradeParams.getUserId(), assignGradeParams.getSubjectId());
+
+            enrollment.setGrade(assignGradeParams.getGrade());
+            enrollmentRepository.save(enrollment);
+    
+            return enrollment;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+        
     }
 }
