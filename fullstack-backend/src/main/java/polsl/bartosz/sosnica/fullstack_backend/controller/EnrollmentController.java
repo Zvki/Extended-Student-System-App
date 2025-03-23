@@ -1,15 +1,23 @@
 package polsl.bartosz.sosnica.fullstack_backend.controller;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Optional;
+import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import jakarta.validation.ConstraintViolation;
+import jakarta.validation.Validator;
+import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.RequestAssignGradeDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.ResponseEnrollmentDTO;
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.EnrollmentInterfaces.IEnrollmentService;
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.SubjectInterfaces.ISubjectService;
@@ -18,6 +26,7 @@ import polsl.bartosz.sosnica.fullstack_backend.model.EnrollmentModel;
 import polsl.bartosz.sosnica.fullstack_backend.model.SubjectModel;
 import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
+import polsl.bartosz.sosnica.fullstack_backend.utils.MyValidationUtils;
 
 /**
  * Controller responsible for handling student enrollment operations.
@@ -31,6 +40,9 @@ import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
  */
 @RestController
 public class EnrollmentController {
+
+    @Autowired
+    private Validator validator;
 
     private IEnrollmentService enrollmentService;
 
@@ -127,4 +139,18 @@ public class EnrollmentController {
         return ResponseEntity.ok(correctResponse);
     }
 
+    @PatchMapping("/assigngrade")
+    public ResponseEntity<?> assignGrade(@RequestBody RequestAssignGradeDTO assignGradeParams) {
+
+        var response = enrollmentService.assignGrade(assignGradeParams);
+
+        if (response == null) {
+            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "Problem occured while adding grade", null, null);
+            return ResponseEntity.badRequest().body(apiResponse);
+        }
+
+        var correctResponse = new ApiResponse<EnrollmentModel>(true, "User Enrollments", response, null);
+
+        return ResponseEntity.ok(correctResponse);
+    }
 }

@@ -13,7 +13,6 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-
 @Getter
 @Setter
 @AllArgsConstructor
@@ -21,11 +20,11 @@ import lombok.Setter;
 @Entity
 @Table(name = "Enrollments")
 public class EnrollmentModel {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    
+
     @Column(name = "grade")
     private Double grade;
 

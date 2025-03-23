@@ -67,4 +67,19 @@ public class SubjectController {
 
     }
 
+    @GetMapping("/usersteachsubjects/{userId}")
+    public ResponseEntity<?> findSubjectsTeachByUser(@PathVariable Long userId) {
+
+        var result = subjectService.findSubjectsTeachByUser(userId);
+
+        if (result == null) {
+            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "No data provided", null, null);
+            return ResponseEntity.badRequest().body(apiResponse);
+        }
+
+        var correctResponse = new ApiResponse<List<SubjectModel>>(true, "Provided subjects", result, null);
+
+        return ResponseEntity.ok(correctResponse);
+    }
+
 }

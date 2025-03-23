@@ -33,4 +33,6 @@ public interface ISubjectService {
      */
     List<SubjectModel> findSubjectsNotEnrolledByUser(Long userId);
 
+    List<SubjectModel> findSubjectsTeachByUser(Long userId);
+
 }
