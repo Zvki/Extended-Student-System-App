@@ -5,6 +5,8 @@ import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.security.SecurityProperties.User;
+import org.springframework.data.repository.query.Param;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -85,5 +87,15 @@ public class EnrollmentService implements IEnrollmentService {
             return null;
         }
         
+    }
+
+    public List<UserModel> findUsersBySubjectId(Long subjectId) {
+        try{
+            List<UserModel> result = enrollmentRepository.findUsersBySubjectId(subjectId);
+            return result;
+        } catch(Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
     }
 }
