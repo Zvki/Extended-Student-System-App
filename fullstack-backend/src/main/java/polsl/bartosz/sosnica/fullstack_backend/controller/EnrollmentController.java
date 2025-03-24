@@ -23,10 +23,13 @@ import polsl.bartosz.sosnica.fullstack_backend.interfaces.EnrollmentInterfaces.I
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.SubjectInterfaces.ISubjectService;
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.UserInterfaces.IUserService;
 import polsl.bartosz.sosnica.fullstack_backend.model.EnrollmentModel;
+import java.util.List;
 import polsl.bartosz.sosnica.fullstack_backend.model.SubjectModel;
 import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
 import polsl.bartosz.sosnica.fullstack_backend.utils.MyValidationUtils;
+import org.springframework.web.bind.annotation.RequestParam;
+
 
 /**
  * Controller responsible for handling student enrollment operations.
@@ -109,7 +112,7 @@ public class EnrollmentController {
             return ResponseEntity.badRequest().body(apiResponse);
         }
 
-        var correctResponse = new ApiResponse<EnrollmentModel>(true, "Enrollment successful", result, null);
+        var correctResponse = new ApiResponse<EnrollmentModel>(true, "Enrollments enrolled", result, null);
 
         return ResponseEntity.ok(correctResponse);
     }
@@ -149,8 +152,23 @@ public class EnrollmentController {
             return ResponseEntity.badRequest().body(apiResponse);
         }
 
-        var correctResponse = new ApiResponse<EnrollmentModel>(true, "User Enrollments", response, null);
+        var correctResponse = new ApiResponse<EnrollmentModel>(true, "User graded", response, null);
 
         return ResponseEntity.ok(correctResponse);
     }
+
+    @GetMapping("/findusersbysubject/{subjectId}")
+    public ResponseEntity<?> findUserBySubjectId(@PathVariable Long subjectId) {
+
+        var response = enrollmentService.findUsersBySubjectId(subjectId);
+
+        if (response == null) {
+            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "Problem occured while finding participants", null, null);
+            return ResponseEntity.badRequest().body(apiResponse);
+        }
+
+        var correctResponse = new ApiResponse<List<UserModel>>(true, "Users enrolled", response, null);
+        return ResponseEntity.ok(correctResponse);
+    }
+    
 }
