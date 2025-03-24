@@ -42,4 +42,6 @@ public interface IEnrollmentService {
 
     EnrollmentModel assignGrade(RequestAssignGradeDTO assignGradeParams);
 
+    List<UserModel> findUsersBySubjectId(Long subjectId);
+
 }
