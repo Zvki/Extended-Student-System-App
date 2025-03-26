@@ -1,1 +1,15 @@
-<p>Choose subject</p>
+
+<app-base-layout>
+    <app-dashboard-header>
+        <h2>Choose subject</h2>
+    </app-dashboard-header>
+    <section class="quick-actions">
+        <section class="features">
+            <button class="feature-card" *ngFor="let subject of subjects$ | async"  [routerLink]="['/subject', subject.id]" >
+                <h3>{{ subject.name }}</h3>
+            </button>
+        </section>
+    </section>
+</app-base-layout>
+
+    
