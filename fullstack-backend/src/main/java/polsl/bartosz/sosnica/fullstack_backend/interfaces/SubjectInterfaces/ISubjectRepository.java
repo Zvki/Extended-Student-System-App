@@ -7,6 +7,9 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import polsl.bartosz.sosnica.fullstack_backend.controller.EnrollmentController;
+import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.ResponseEnrollmentDTO;
+import polsl.bartosz.sosnica.fullstack_backend.model.EnrollmentModel;
 import polsl.bartosz.sosnica.fullstack_backend.model.SubjectModel;
 
 /**
@@ -35,4 +38,7 @@ public interface ISubjectRepository extends JpaRepository<SubjectModel, Long> {
 
     @Query("SELECT s FROM SubjectModel s WHERE s.user.id = :userId")
     List<SubjectModel> findSubjectsTeachByUser(@Param("userId") Long userId);
+
+    @Query("SELECT e.subject FROM EnrollmentModel e WHERE e.user.id = :userId")
+    List<SubjectModel> findSubjectsAttendedByUser(@Param("userId") Long userId);
 }

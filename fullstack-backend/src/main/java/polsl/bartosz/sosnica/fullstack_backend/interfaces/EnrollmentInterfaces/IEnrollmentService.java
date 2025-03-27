@@ -6,6 +6,7 @@ import org.springframework.data.repository.query.Param;
 
 import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.RequestAssignGradeDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.ResponseEnrollmentDTO;
+import polsl.bartosz.sosnica.fullstack_backend.dto.user.ResponseUserGradeDTO;
 import polsl.bartosz.sosnica.fullstack_backend.model.EnrollmentModel;
 import polsl.bartosz.sosnica.fullstack_backend.model.SubjectModel;
 import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
@@ -42,6 +43,6 @@ public interface IEnrollmentService {
 
     EnrollmentModel assignGrade(RequestAssignGradeDTO assignGradeParams);
 
-    List<UserModel> findUsersBySubjectId(Long subjectId);
+    List<ResponseUserGradeDTO> findUsersBySubjectId(Long subjectId);
 
 }

@@ -7,8 +7,8 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.ResponseEnrollmentDTO;
+import polsl.bartosz.sosnica.fullstack_backend.dto.user.ResponseUserGradeDTO;
 import polsl.bartosz.sosnica.fullstack_backend.model.EnrollmentModel;
-import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 
 /**
  * Repository interface for managing enrollments in subjects.
@@ -41,9 +41,11 @@ public interface IEnrollmentRepository extends JpaRepository<EnrollmentModel, Lo
     @Query("SELECT e FROM EnrollmentModel e WHERE e.user.id = :userId AND e.subject.id = :subjectId")
     EnrollmentModel findByUserIdAndSubjectId(@Param("userId") Long userId, @Param("subjectId") Long subjectId);
 
-
-    @Query("SELECT u FROM UserModel u JOIN EnrollmentModel e ON e.user.id = u.id WHERE e.subject.id = :subjectId")
-    List<UserModel> findUsersBySubjectId(@Param("subjectId") Long subjectId);
-
+    @Query("SELECT new polsl.bartosz.sosnica.fullstack_backend.dto.user.ResponseUserGradeDTO(u.id, u.name, u.surname, e.grade) "
+            +
+            "FROM UserModel u " +
+            "JOIN EnrollmentModel e ON e.user.id = u.id " +
+            "WHERE e.subject.id = :subjectId")
+    List<ResponseUserGradeDTO> findUsersBySubjectId(@Param("subjectId") Long subjectId);
 
 }

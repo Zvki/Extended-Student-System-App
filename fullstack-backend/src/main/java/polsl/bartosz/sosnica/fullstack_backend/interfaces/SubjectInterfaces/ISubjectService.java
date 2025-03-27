@@ -3,6 +3,8 @@ package polsl.bartosz.sosnica.fullstack_backend.interfaces.SubjectInterfaces;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.repository.query.Param;
+
 import polsl.bartosz.sosnica.fullstack_backend.model.SubjectModel;
 
 public interface ISubjectService {
@@ -34,5 +36,7 @@ public interface ISubjectService {
     List<SubjectModel> findSubjectsNotEnrolledByUser(Long userId);
 
     List<SubjectModel> findSubjectsTeachByUser(Long userId);
+
+    List<SubjectModel> findSubjectsAttendedByUser(Long userId);
 
 }
