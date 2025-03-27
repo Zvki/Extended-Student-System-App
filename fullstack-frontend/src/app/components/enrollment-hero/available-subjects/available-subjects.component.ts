@@ -3,7 +3,7 @@ import { BehaviorSubject, map, Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../../utils/UserService';
 import { AsyncPipe, CommonModule } from '@angular/common';
-import { Subject } from '../../../utils/interfaces/SubjectInterface';
+import { Subject } from '../../../utils/types/SubjectInterface';
 import { SubjectPlaceholderComponent } from '../../subject-placeholder/subject-placeholder.component';
 import { EnrollmentItemComponent } from '../enrollment-item/enrollment-item.component';
 import { DashboardHeaderComponent } from '../../dashboard-header/dashboard-header.component';

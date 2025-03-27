@@ -10,6 +10,7 @@ import { ChangePasswordPageComponent } from './pages/change-password-page/change
 import { EditProfilePageComponent } from './pages/edit-profile-page/edit-profile-page.component';
 import { AuthGuard } from './utils/guards/AuthGuard';
 import { AssignGradesPageComponent } from './pages/assign-grades-page/assign-grades-page.component';
+import { ChooseSubjectPageComponent } from './pages/choose-subject-page/choose-subject-page.component';
 
 export const routes: Routes = [
 { path: '', component: LandingPageComponent },
@@ -21,5 +22,6 @@ export const routes: Routes = [
 { path: 'enrollments', component: EnrollmentPageComponent, canActivate: [AuthGuard] },
 { path: 'changepasswd', component: ChangePasswordPageComponent, canActivate: [AuthGuard] },
 { path: 'editprofile', component: EditProfilePageComponent, canActivate: [AuthGuard] },
+{ path: 'choosesubject', component: ChooseSubjectPageComponent, canActivate: [AuthGuard] },
 { path: 'assigngrades', component: AssignGradesPageComponent, canActivate: [AuthGuard] }
 ];

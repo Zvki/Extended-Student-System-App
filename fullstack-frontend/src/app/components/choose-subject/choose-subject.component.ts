@@ -4,7 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { map } from 'rxjs/operators';
 import { AsyncPipe, CommonModule } from '@angular/common';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { Subject } from '../../utils/interfaces/SubjectInterface';
+import { Subject } from '../../utils/types/SubjectInterface';
 import { RouterLink } from '@angular/router';
 import { BaseLayoutComponent } from '../base-layout/base-layout.component';
 import { DashboardHeaderComponent } from '../dashboard-header/dashboard-header.component';

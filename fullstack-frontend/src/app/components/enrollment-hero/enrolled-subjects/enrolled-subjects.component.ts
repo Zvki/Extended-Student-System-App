@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { BehaviorSubject, map, Observable } from 'rxjs';
-import { Enrollment } from '../../../utils/interfaces/EnrollmentInterfaces';
+import { Enrollment } from '../../../utils/types/EnrollmentInterface';
 import { HttpClient } from '@angular/common/http';
 import { UserService } from '../../../utils/UserService';
 import { AsyncPipe, CommonModule } from '@angular/common';

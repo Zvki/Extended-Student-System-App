@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { Enrollment } from '../../utils/interfaces/EnrollmentInterfaces';
+import { Enrollment } from '../../utils/types/EnrollmentInterface';
 import { HttpClient} from '@angular/common/http';
 import { UserService } from '../../utils/UserService';
 import { BehaviorSubject, map } from 'rxjs';

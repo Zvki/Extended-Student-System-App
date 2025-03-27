@@ -1,8 +1,8 @@
 import { CommonModule } from '@angular/common';
 import { Component, ContentChild, Input, TemplateRef, ViewEncapsulation } from '@angular/core';
 import { Observable} from 'rxjs';
-import { Subject } from '../../../utils/interfaces/SubjectInterface';
-import { Enrollment } from '../../../utils/interfaces/EnrollmentInterfaces';
+import { Subject } from '../../../utils/types/SubjectInterface';
+import { Enrollment } from '../../../utils/types/EnrollmentInterface';
 
 @Component({
   selector: 'app-enrollment-item',
