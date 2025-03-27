@@ -11,4 +11,5 @@ public class ResponseUserGradeDTO {
     private Long id;
     private String name;
     private String surname;
+    private Double grade;
 }

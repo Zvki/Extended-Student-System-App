@@ -12,5 +12,4 @@ public class ResponseEnrollmentDTO {
     private String name;
     private double grade;
     private String description;
-
 }
