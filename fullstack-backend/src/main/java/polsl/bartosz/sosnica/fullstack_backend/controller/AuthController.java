@@ -40,14 +40,17 @@ public class AuthController {
 
     private final IAuthService authService;
 
+    private final JwtTokenUtil jwtTokenUtil;
+
     /**
      * Constructs an AuthController with the specified authentication service.
      * 
      * @param authService the authentication service implementation
      */
     @Autowired
-    public AuthController(IAuthService authService) {
+    public AuthController(IAuthService authService, JwtTokenUtil jwtTokenUtil) {
         this.authService = authService;
+        this.jwtTokenUtil = jwtTokenUtil;
     }
 
     /**
@@ -60,8 +63,10 @@ public class AuthController {
      * </p>
      * 
      * @param loginData the login request data containing username and password
-     * @param response  the HTTP servlet response, used to set authentication cookies
-     * @return a {@code ResponseEntity} containing authentication result or validation errors
+     * @param response  the HTTP servlet response, used to set authentication
+     *                  cookies
+     * @return a {@code ResponseEntity} containing authentication result or
+     *         validation errors
      */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody RequestLoginDTO loginData, HttpServletResponse response) {
@@ -86,7 +91,7 @@ public class AuthController {
             return ResponseEntity.badRequest().body(apiResponse);
         }
 
-        String jwtToken = JwtTokenUtil.generateToken(loginResult.getName());
+        String jwtToken = jwtTokenUtil.generateToken(loginResult.getName());
 
         if (jwtToken == null) {
             ApiResponse<Void> apiResponse = new ApiResponse<>(false, "Token generation failed", null, null);
@@ -116,7 +121,8 @@ public class AuthController {
      * </p>
      * 
      * @param registerData the registration request data containing user details
-     * @return a {@code ResponseEntity} containing registration result or validation errors
+     * @return a {@code ResponseEntity} containing registration result or validation
+     *         errors
      */
     @PostMapping("/register")
     public ResponseEntity<?> register(@RequestBody RequestRegisterDTO registerData) {

@@ -19,6 +19,7 @@ import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
 import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.RequestAssignGradeDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.ResponseEnrollmentDTO;
+import polsl.bartosz.sosnica.fullstack_backend.dto.user.ResponseUserGradeDTO;
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.EnrollmentInterfaces.IEnrollmentService;
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.SubjectInterfaces.ISubjectService;
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.UserInterfaces.IUserService;
@@ -29,7 +30,6 @@ import polsl.bartosz.sosnica.fullstack_backend.model.UserModel;
 import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
 import polsl.bartosz.sosnica.fullstack_backend.utils.MyValidationUtils;
 import org.springframework.web.bind.annotation.RequestParam;
-
 
 /**
  * Controller responsible for handling student enrollment operations.
@@ -78,7 +78,8 @@ public class EnrollmentController {
      * 
      * @param userId    the ID of the user to be enrolled
      * @param subjectId the ID of the subject to enroll the user in
-     * @return a {@code ResponseEntity} containing the enrollment result or an error message
+     * @return a {@code ResponseEntity} containing the enrollment result or an error
+     *         message
      */
     @PostMapping("{userId}/enroll/{subjectId}")
     public ResponseEntity<?> enrollStudentToSubject(@PathVariable Long userId, @PathVariable Long subjectId) {
@@ -121,11 +122,13 @@ public class EnrollmentController {
      * Retrieves all enrollments for a given user.
      * 
      * <p>
-     * This method fetches all subjects that a user is enrolled in based on their user ID.
+     * This method fetches all subjects that a user is enrolled in based on their
+     * user ID.
      * </p>
      * 
      * @param userId the ID of the user whose enrollments are to be retrieved
-     * @return a {@code ResponseEntity} containing a list of enrollments or an error message
+     * @return a {@code ResponseEntity} containing a list of enrollments or an error
+     *         message
      */
     @GetMapping("/getenrollments/{userId}")
     public ResponseEntity<?> findEnrollmentByUserId(@PathVariable Long userId) {
@@ -163,12 +166,13 @@ public class EnrollmentController {
         var response = enrollmentService.findUsersBySubjectId(subjectId);
 
         if (response == null) {
-            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "Problem occured while finding participants", null, null);
+            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "Problem occured while finding participants", null,
+                    null);
             return ResponseEntity.badRequest().body(apiResponse);
         }
 
-        var correctResponse = new ApiResponse<List<UserModel>>(true, "Users enrolled", response, null);
+        var correctResponse = new ApiResponse<List<ResponseUserGradeDTO>>(true, "Users enrolled", response, null);
         return ResponseEntity.ok(correctResponse);
     }
-    
+
 }

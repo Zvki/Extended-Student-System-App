@@ -6,12 +6,14 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.SubjectInterfaces.ISubjectService;
 import polsl.bartosz.sosnica.fullstack_backend.model.SubjectModel;
 import polsl.bartosz.sosnica.fullstack_backend.response.ApiResponse;
 import polsl.bartosz.sosnica.fullstack_backend.service.SubjectService;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  * Controller responsible for handling subject-related operations.
@@ -24,6 +26,7 @@ import polsl.bartosz.sosnica.fullstack_backend.service.SubjectService;
  * @author Bartosz Sosnica
  */
 @RestController
+@RequestMapping("/subject")
 public class SubjectController {
 
     private ISubjectService subjectService;
@@ -71,6 +74,20 @@ public class SubjectController {
     public ResponseEntity<?> findSubjectsTeachByUser(@PathVariable Long userId) {
 
         var result = subjectService.findSubjectsTeachByUser(userId);
+
+        if (result == null) {
+            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "No data provided", null, null);
+            return ResponseEntity.badRequest().body(apiResponse);
+        }
+
+        var correctResponse = new ApiResponse<List<SubjectModel>>(true, "Provided subjects", result, null);
+
+        return ResponseEntity.ok(correctResponse);
+    }
+
+    @GetMapping("/usersattemptedsubjects/{userId}")
+    public ResponseEntity<?> findSubjectsAttendedByUser(@PathVariable Long userId) {
+        var result = subjectService.findSubjectsAttendedByUser(userId);
 
         if (result == null) {
             ApiResponse<Void> apiResponse = new ApiResponse<>(false, "No data provided", null, null);
