@@ -14,6 +14,7 @@ import jakarta.validation.ConstraintViolation;
 import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.RequestAssignGradeDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.enrollment.ResponseEnrollmentDTO;
 import polsl.bartosz.sosnica.fullstack_backend.dto.user.RequestChPasswdDTO;
+import polsl.bartosz.sosnica.fullstack_backend.dto.user.ResponseUserGradeDTO;
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.EnrollmentInterfaces.IEnrollmentRepository;
 import polsl.bartosz.sosnica.fullstack_backend.interfaces.EnrollmentInterfaces.IEnrollmentService;
 import polsl.bartosz.sosnica.fullstack_backend.model.EnrollmentModel;
@@ -75,25 +76,26 @@ public class EnrollmentService implements IEnrollmentService {
 
     public EnrollmentModel assignGrade(RequestAssignGradeDTO assignGradeParams) {
 
-        try{
-            EnrollmentModel enrollment = enrollmentRepository.findByUserIdAndSubjectId(assignGradeParams.getUserId(), assignGradeParams.getSubjectId());
+        try {
+            EnrollmentModel enrollment = enrollmentRepository.findByUserIdAndSubjectId(assignGradeParams.getUserId(),
+                    assignGradeParams.getSubjectId());
 
             enrollment.setGrade(assignGradeParams.getGrade());
             enrollmentRepository.save(enrollment);
-    
+
             return enrollment;
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }
-        
+
     }
 
-    public List<UserModel> findUsersBySubjectId(Long subjectId) {
-        try{
-            List<UserModel> result = enrollmentRepository.findUsersBySubjectId(subjectId);
+    public List<ResponseUserGradeDTO> findUsersBySubjectId(Long subjectId) {
+        try {
+            List<ResponseUserGradeDTO> result = enrollmentRepository.findUsersBySubjectId(subjectId);
             return result;
-        } catch(Exception e) {
+        } catch (Exception e) {
             System.out.println(e.getMessage());
             return null;
         }

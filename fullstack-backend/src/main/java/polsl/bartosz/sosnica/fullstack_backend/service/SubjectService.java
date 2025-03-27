@@ -68,4 +68,13 @@ public class SubjectService implements ISubjectService {
             return null;
         }
     }
+
+    public List<SubjectModel> findSubjectsAttendedByUser(Long userId) {
+        try {
+            return subjectRepository.findSubjectsAttendedByUser(userId);
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+            return null;
+        }
+    }
 }
