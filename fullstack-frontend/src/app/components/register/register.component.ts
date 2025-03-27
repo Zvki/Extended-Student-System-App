@@ -3,6 +3,7 @@ import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router } from '@angular/router';
 import { BaseLayoutComponent } from '../base-layout/base-layout.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-register',
@@ -33,7 +34,7 @@ export class RegisterComponent {
     }
 
     setTimeout(() => {
-    this.http.post<{ success: boolean; message: string; data: any }>('http://localhost:8080/register', this.registerData)
+    this.http.post<{ success: boolean; message: string; data: any }>(`${environment.apiUrl}register`, this.registerData)
     .subscribe({ next: (response) => {
       console.log('Register successful:', response);
       

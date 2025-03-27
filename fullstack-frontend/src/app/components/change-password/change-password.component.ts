@@ -6,6 +6,7 @@ import { map } from 'rxjs';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
 import { response } from 'express';
 import { Router } from '@angular/router';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-change-password',
@@ -38,7 +39,7 @@ export class ChangePasswordComponent {
     }
 
     this.id$.subscribe( id => {
-      this.http.patch(`http://localhost:8080/changepasswd/${id}`, requestBody).subscribe({
+      this.http.patch(`${environment.apiUrl}changepasswd/${id}`, requestBody).subscribe({
         next: (response) => {
           alert('Password changed succesfully');
           this.router.navigate(['/profile'])

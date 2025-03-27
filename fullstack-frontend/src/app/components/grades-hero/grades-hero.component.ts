@@ -7,6 +7,7 @@ import { AsyncPipe, CommonModule } from '@angular/common';
 import { SubjectPlaceholderComponent } from '../subject-placeholder/subject-placeholder.component';
 import { DashboardHeaderComponent } from '../dashboard-header/dashboard-header.component';
 import { BaseLayoutComponent } from '../base-layout/base-layout.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-grades-hero',
@@ -30,7 +31,7 @@ export class GradesHeroComponent {
 
     setTimeout(() => {
     this.id$.subscribe(id => {
-      this.http.get<{ success: boolean; message: string; data: any }>(`http://localhost:8080/getenrollments/${id}`)
+      this.http.get<{ success: boolean; message: string; data: any }>(`${environment.apiUrl}getenrollments/${id}`)
         .subscribe({
           next: (response) => {
             console.log('Grades received', response)

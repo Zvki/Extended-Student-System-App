@@ -12,7 +12,7 @@ import { Enrollment } from '../../../utils/types/EnrollmentInterface';
   styleUrl: './enrollment-item.component.css'
 })
 export class EnrollmentItemComponent {
-  @Input() subjects$: Observable<(Subject | Enrollment)[]> | undefined;
+  @Input() subjects$: Observable<Subject[]> | undefined;
 
   @ContentChild(TemplateRef) enrollButtonTemplate: TemplateRef<{subject: Subject}> | undefined;
 

@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { HttpClientModule, HttpClient } from '@angular/common/http';
 import { UserService } from '../../utils/UserService';
 import { BaseLayoutComponent } from '../base-layout/base-layout.component';
+import { environment } from '../../../environments/environment';
 
 
 @Component({
@@ -31,7 +32,7 @@ export class LoginComponent {
     const loginData = { email: this.email, password: this.password };
 
     setTimeout(() => {
-    this.http.post<{ success: boolean; message: string; data: any }>('http://localhost:8080/login', loginData, { withCredentials: true })
+    this.http.post<{ success: boolean; message: string; data: any }>(`${environment.apiUrl}login`, loginData, { withCredentials: true })
       .subscribe({
         next: (response) => {
           console.log('Login successful:', response);

@@ -1,1 +1,30 @@
-<p>assign-grades works!</p>
+<app-base-layout>
+    <app-dashboard-header>
+        <h2>Assign Grades</h2>
+    </app-dashboard-header>
+    <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Surname</th>
+            <th>Grade</th>
+            <th>Action</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let user of userTable">
+            <td>{{ user.name }}</td>
+            <td>{{ user.surname }}</td>
+            <td>
+              <input type="number" [(ngModel)]="user.grade" min="2" max="5" step="0.5" />
+            </td>
+            <td>
+              <button (click)="assignGrade(user.id, user.grade)">Save</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+</app-base-layout>
+
+
+

@@ -8,6 +8,8 @@ import { SubjectPlaceholderComponent } from '../../subject-placeholder/subject-p
 import { EnrollmentItemComponent } from '../enrollment-item/enrollment-item.component';
 import { DashboardHeaderComponent } from '../../dashboard-header/dashboard-header.component';
 import { BaseLayoutComponent } from '../../base-layout/base-layout.component';
+import { Subject } from '../../../utils/types/SubjectInterface';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-enrolled-subjects',
@@ -18,7 +20,7 @@ import { BaseLayoutComponent } from '../../base-layout/base-layout.component';
 })
 export class EnrolledSubjectsComponent {
 
-  subjects$: Observable<Enrollment[]> | undefined;
+  subjects$: Observable<Subject[]> | undefined;
   id$ = this.userService.user$.pipe(map(user => user?.id));
   isLoading: boolean = true;
   expandedEnrollments: { [key: number]: boolean } = {};
@@ -31,11 +33,11 @@ export class EnrolledSubjectsComponent {
 
     setTimeout(() => {
     this.id$.subscribe(id => {
-      this.http.get<{ success: boolean; message: string; data: any }>(`http://localhost:8080/getenrollments/${id}`)
+      this.http.get<{ success: boolean; message: string; data: any }>(`${environment.apiUrl}subject/usersattemptedsubjects/${id}`)
         .subscribe({
           next: (response) => {
             console.log('Enrollments received', response)
-            this.subjects$ = new BehaviorSubject<Enrollment[]>(response.data).asObservable();
+            this.subjects$ = new BehaviorSubject<Subject[]>(response.data).asObservable();
             this.isLoading = false;
           },
           error: (error) => {

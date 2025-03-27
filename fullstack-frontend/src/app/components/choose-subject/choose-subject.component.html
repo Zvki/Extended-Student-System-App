@@ -5,7 +5,7 @@
     </app-dashboard-header>
     <section class="quick-actions">
         <section class="features">
-            <button class="feature-card" *ngFor="let subject of subjects$ | async"  [routerLink]="['/subject', subject.id]" >
+            <button class="feature-card" *ngFor="let subject of subjects$ | async"  [routerLink]="['/assigngrades', subject.id]" >
                 <h3>{{ subject.name }}</h3>
             </button>
         </section>

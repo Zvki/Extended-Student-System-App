@@ -9,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
 import { response } from 'express';
 import { Router } from '@angular/router';
 import { error } from 'console';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-edit-profile',
@@ -43,8 +44,7 @@ export class EditProfileComponent {
       surname: this.surname,
       email: this. email
     }
-
-    this.http.patch<{ success: boolean; message: string; data: any }>(`http://localhost:8080/editprofile/${this.id}`, requestBody).subscribe({
+    this.http.patch<{ success: boolean; message: string; data: any }>(`${environment.apiUrl}editprofile/${this.id}`, requestBody).subscribe({
       next: (response) => {
 
         if (response.success && response.data) {

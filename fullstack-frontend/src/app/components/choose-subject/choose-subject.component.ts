@@ -8,6 +8,7 @@ import { Subject } from '../../utils/types/SubjectInterface';
 import { RouterLink } from '@angular/router';
 import { BaseLayoutComponent } from '../base-layout/base-layout.component';
 import { DashboardHeaderComponent } from '../dashboard-header/dashboard-header.component';
+import { environment } from '../../../environments/environment';
 
 @Component({
   selector: 'app-choose-subject',
@@ -25,7 +26,7 @@ export class ChooseSubjectComponent {
 
   ngOnInit(): void {
     this.id$.subscribe(id => {
-      this.http.get<{ success: boolean; message: string; data: any }>(`http://localhost:8080/usersteachsubjects/${id}`)
+      this.http.get<{ success: boolean; message: string; data: any }>(`${environment.apiUrl}subject/usersteachsubjects/${id}`)
         .subscribe(
           {next: (response) => {
               this.subjects$ = new BehaviorSubject<Subject[]>(response.data).asObservable();

@@ -1,0 +1,104 @@
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 20px;
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 15px;
+    overflow: hidden;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+    backdrop-filter: blur(10px);
+}
+
+th, td {
+    padding: 15px;
+    text-align: center;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.2);
+    color: #E4F9F5;
+    font-weight: bold;
+}
+
+th {
+    background: linear-gradient(90deg, #1F1C2C, #928DAB);
+    color: white;
+    font-size: 18px;
+}
+
+td {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+td input {
+    width: 100%;
+    padding: 10px;
+    border: 2px solid #6DD5FA;
+    border-radius: 8px;
+    font-size: 16px;
+    text-align: center;
+    background: rgba(255, 255, 255, 0.2);
+    color: white;
+}
+
+td input:focus {
+    outline: none;
+    border-color: #A4EBF3;
+    box-shadow: 0 0 10px rgba(164, 235, 243, 0.7);
+}
+
+button {
+    background: linear-gradient(90deg, #6DD5FA, #2980B9);
+    border: none;
+    color: white;
+    padding: 12px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+}
+
+button:hover {
+    background: linear-gradient(90deg, #2980B9, #6DD5FA);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0, 0, 0, 0.5);
+}
+
+.buttons {
+    position: fixed;
+    bottom: 2vh; 
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 30px;
+    border-radius: 10px;
+}
+
+.buttons button {
+    margin: 20px;
+}
+
+.buttons button.active {
+    background: linear-gradient(120deg, #00bcd4, #00a1c0);
+    color: white;
+    transform: scale(1.05);
+}
+
+@media (max-width: 768px) {
+    table {
+        font-size: 14px;
+    }
+
+    th, td {
+        padding: 10px;
+    }
+
+    button {
+        padding: 10px 15px;
+        font-size: 14px;
+    }
+
+    td input {
+        padding: 8px;
+        font-size: 14px;
+    }
+}

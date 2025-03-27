@@ -8,6 +8,7 @@ import { SubjectPlaceholderComponent } from '../../subject-placeholder/subject-p
 import { EnrollmentItemComponent } from '../enrollment-item/enrollment-item.component';
 import { DashboardHeaderComponent } from '../../dashboard-header/dashboard-header.component';
 import { BaseLayoutComponent } from '../../base-layout/base-layout.component';
+import { environment } from '../../../../environments/environment';
 @Component({
   selector: 'app-available-subjects',
   standalone: true,
@@ -52,7 +53,7 @@ export class AvailableSubjectsComponent {
 
     setTimeout(() => {
       this.id$.subscribe(id => {
-        this.http.get<{ success: boolean; message: string; data: any }>(`http://localhost:8080/usersavailablesubjects/${id}`)
+        this.http.get<{ success: boolean; message: string; data: any }>(`${environment.apiUrl}subject/usersavailablesubjects/${id}`)
           .subscribe({
             next: (response) => {
               console.log('Subject received', response)
