@@ -1,9 +1,14 @@
 package polsl.bartosz.sosnica.fullstack_backend.utils;
 
 import java.sql.Date;
+import java.util.Base64;
+
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
+import jakarta.annotation.PostConstruct;
 
 /**
  * Utility class for generating JSON Web Tokens (JWT).
@@ -13,6 +18,7 @@ import io.jsonwebtoken.SignatureAlgorithm;
  * a secret key and HS256 signing algorithm.
  * </p>
  */
+@Component
 public class JwtTokenUtil {
 
     /**
@@ -21,7 +27,8 @@ public class JwtTokenUtil {
      * This key should be stored securely and not be hardcoded in production.
      * </p>
      */
-    private static final String SECRET_KEY = "M2lU7lBrl90389ojhkFuRX2HqjmIHT9aH2dTES4cVFwAV33ZH3pAiXfWCzc9Wv4z";
+    @Value("${jwt.secret}")
+    private String SECRET_KEY;
 
     /**
      * Generates a JWT token for the specified user.
@@ -34,8 +41,7 @@ public class JwtTokenUtil {
      *             `java.util.Date` or another approach to avoid deprecation
      *             warnings.
      */
-    @SuppressWarnings("deprecation")
-    static public String generateToken(String user) {
+    public String generateToken(String user) {
         return Jwts.builder()
                 .setSubject(user)
                 .setIssuedAt(new Date(System.currentTimeMillis()))
