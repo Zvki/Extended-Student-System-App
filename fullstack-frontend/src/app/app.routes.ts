@@ -23,5 +23,5 @@ export const routes: Routes = [
 { path: 'changepasswd', component: ChangePasswordPageComponent, canActivate: [AuthGuard] },
 { path: 'editprofile', component: EditProfilePageComponent, canActivate: [AuthGuard] },
 { path: 'choosesubject', component: ChooseSubjectPageComponent, canActivate: [AuthGuard] },
-{ path: 'assigngrades', component: AssignGradesPageComponent, canActivate: [AuthGuard] }
+{ path: 'assigngrades/:id', component: AssignGradesPageComponent, canActivate: [AuthGuard] }
 ];
