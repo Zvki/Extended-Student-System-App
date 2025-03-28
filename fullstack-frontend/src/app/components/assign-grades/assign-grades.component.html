@@ -6,15 +6,13 @@
         <thead>
           <tr>
             <th>Name</th>
-            <th>Surname</th>
             <th>Grade</th>
             <th>Action</th>
           </tr>
         </thead>
         <tbody>
           <tr *ngFor="let user of userTable">
-            <td>{{ user.name }}</td>
-            <td>{{ user.surname }}</td>
+            <td>{{ user.name }} {{ user.surname }}</td>
             <td>
               <input type="number" [(ngModel)]="user.grade" min="2" max="5" step="0.5" />
             </td>
