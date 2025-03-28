@@ -23,6 +23,7 @@ export class LoginComponent {
   constructor(private http: HttpClient, private router: Router, private userService: UserService) {}
 
   onSubmit(): void {
+    console.log(`${environment.apiUrl}`)
     this.isLoading = true;
 
     if (this.isLoading) {
