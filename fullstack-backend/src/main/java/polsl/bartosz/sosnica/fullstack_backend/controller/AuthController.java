@@ -1,5 +1,9 @@
 package polsl.bartosz.sosnica.fullstack_backend.controller;
 
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.Date;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
@@ -8,6 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.validation.ConstraintViolation;
 import jakarta.validation.Validator;
@@ -100,9 +105,13 @@ public class AuthController {
 
         Cookie cookie = new Cookie("authToken", jwtToken);
         cookie.setSecure(true);
+        cookie.setHttpOnly(true);
         cookie.setPath("/");
-        cookie.setMaxAge(60 * 60 * 24);
-        response.addCookie(cookie);
+        cookie.setMaxAge(60 * 15);
+        response.addHeader("Set-Cookie",
+                cookie.getName() + "=" + cookie.getValue() +
+                        "; Path=" + cookie.getPath() +
+                        "; HttpOnly; Secure; SameSite=None");
 
         System.out.println("Cookie: " + cookie);
 
@@ -147,4 +156,30 @@ public class AuthController {
         return ResponseEntity.ok(correctResponse);
     }
 
+    @GetMapping("/checkauth")
+    public ResponseEntity<?> checkAuth(HttpServletRequest request) {
+        Map<String, Boolean> response = new HashMap<>();
+        boolean isAuthenticated = request.getCookies() != null &&
+                java.util.Arrays.stream(request.getCookies())
+                        .anyMatch(cookie -> "authToken".equals(cookie.getName()));
+        if (!isAuthenticated) {
+            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "User is not authenticated", null, null);
+            return ResponseEntity.badRequest().body(apiResponse);
+        }
+
+        response.put("authenticated", isAuthenticated);
+        return ResponseEntity.ok(response);
+    }
+
+    @DeleteMapping("/logout")
+    public ResponseEntity<String> logout(HttpServletResponse response) {
+        Cookie cookie = new Cookie("authToken", null);
+        cookie.setHttpOnly(true);
+        cookie.setSecure(true);
+        cookie.setPath("/");
+        cookie.setMaxAge(0);
+        response.addCookie(cookie);
+
+        return ResponseEntity.ok("U ve been logged out");
+    }
 }

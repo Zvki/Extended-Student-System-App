@@ -11,6 +11,7 @@ import { BaseLayoutComponent } from '../base-layout/base-layout.component';
   selector: 'app-landing-hero',
   standalone: true,
   imports: [NgIf, AsyncPipe, RouterLink, DashboardHeaderComponent, BaseLayoutComponent],
+  providers: [AuthService],
   templateUrl: './landing-hero.component.html',
   styleUrl: './landing-hero.component.css'
 })

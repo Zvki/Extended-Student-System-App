@@ -1,4 +1,4 @@
 export const environment = {
-    production: false,
+    prod: false,
     apiUrl: `https://ess-backend-oeup.onrender.com/`
 }

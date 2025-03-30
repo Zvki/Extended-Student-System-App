@@ -4,6 +4,9 @@ import { Router, NavigationEnd } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { BehaviorSubject } from 'rxjs';
 import { UserService } from './UserService';
+import { environment } from '../../environments/environment';
+import { HttpClient } from '@angular/common/http';
+
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +16,7 @@ export class AuthService {
   private isLoggedIn = new BehaviorSubject<boolean>(false);
   isLoggedIn$ = this.isLoggedIn.asObservable();
 
-  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, private userService: UserService) {
+  constructor(@Inject(PLATFORM_ID) private platformId: Object, private router: Router, private userService: UserService, private http: HttpClient ) {
     this.checkAuthStatus();
     this.listenForRouteChanges();
   }
@@ -24,8 +27,17 @@ export class AuthService {
 
   private checkAuthStatus(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const isLoggedIn = this.getCookie('authToken') !== '';
-      this.isLoggedIn.next(isLoggedIn);
+      this.http.get(`${environment.apiUrl}checkauth`, { withCredentials: true})
+        .subscribe(
+          (response: any) => {
+            this.isLoggedIn.next(true)
+          },
+          (error) => {
+            this.isLoggedIn.next(false)
+          }
+        )
+      // const isLoggedIn = this.getCookie('authToken') !== '';
+      // this.isLoggedIn.next(isLoggedIn);
     }
   }
 
@@ -56,7 +68,7 @@ export class AuthService {
   }
 
   private deleteCookie(name: string): void {
-    document.cookie = `${name}=; expires=Thu, 01 Jan 1970 00:00:00 UTC; path=/;`;
+    this.http.delete(`${environment.apiUrl}logout`, { withCredentials: true });
   }
   
 }

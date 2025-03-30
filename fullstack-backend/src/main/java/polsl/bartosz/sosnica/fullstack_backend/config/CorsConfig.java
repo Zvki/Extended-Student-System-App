@@ -38,7 +38,8 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins(frontendUrl)
+                .allowedOrigins("https://ess-three.vercel.app", "https://ess-bartosz-sosnicas-projects.vercel.app",
+                        "https://ess-fpjm2vydq-bartosz-sosnicas-projects.vercel.app", "http://localhost:4200")
                 .allowedMethods("GET", "POST", "DELETE", "OPTIONS", "PATCH")
                 .allowedHeaders("*")
                 .allowCredentials(true);
