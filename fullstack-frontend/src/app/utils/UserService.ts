@@ -18,7 +18,15 @@ export class UserService {
   setUser(userData: any): void {
     console.log('Before save: ', userData)
     if (isPlatformBrowser(this.platformId)) {
-      sessionStorage.setItem('user', JSON.stringify(userData));
+      try {
+        if (window.sessionStorage) {
+          sessionStorage.setItem('user', JSON.stringify(userData));
+        } else {
+          console.error('sessionStorage is not available');
+        }
+      } catch (error) {
+        console.error('Error saving user to sessionStorage:', error);
+      }
     }
     this.userSubject.next(userData);
     console.log('After save: ', userData)
@@ -34,16 +42,32 @@ export class UserService {
 
   clearUser(): void {
     if (isPlatformBrowser(this.platformId)) {
-      sessionStorage.removeItem('user');
+      try {
+        if (window.sessionStorage) {
+          sessionStorage.removeItem('user');
+        } else {
+          console.error('sessionStorage is not available');
+        }
+      } catch (error) {
+        console.error('Error clearing user from sessionStorage:', error);
+      }
     }
     this.userSubject.next(null);
   }
 
   private loadUserFromStorage(): void {
     if (isPlatformBrowser(this.platformId)) {
-      const storedUser = sessionStorage.getItem('user');
-      if (storedUser) {
-        this.userSubject.next(JSON.parse(storedUser));
+      try {
+        if (window.sessionStorage) {
+          const storedUser = sessionStorage.getItem('user');
+          if (storedUser) {
+            this.userSubject.next(JSON.parse(storedUser));
+          }
+        } else {
+          console.error('sessionStorage is not available');
+        }
+      } catch (error) {
+        console.error('Error loading user from sessionStorage:', error);
       }
     }
   }
