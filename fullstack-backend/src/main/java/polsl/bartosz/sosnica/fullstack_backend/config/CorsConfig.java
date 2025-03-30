@@ -21,7 +21,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 public class CorsConfig implements WebMvcConfigurer {
 
     @Value("${frontend.url}")
-    private String frontendAllowed;
+    private String frontendUrl;
 
     /**
      * Configures CORS settings for the entire application.
@@ -38,7 +38,7 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         registry.addMapping("/**")
-                .allowedOrigins(frontendAllowed)
+                .allowedOrigins(frontendUrl)
                 .allowedMethods("GET", "POST", "DELETE", "OPTIONS", "PATCH")
                 .allowedHeaders("*")
                 .allowCredentials(true);
