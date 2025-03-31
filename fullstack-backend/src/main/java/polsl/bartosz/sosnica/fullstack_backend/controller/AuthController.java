@@ -1,13 +1,18 @@
 package polsl.bartosz.sosnica.fullstack_backend.controller;
 
+import java.net.http.HttpHeaders;
+import java.time.Duration;
 import java.time.LocalDateTime;
 import java.time.ZoneOffset;
+import java.util.Arrays;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Set;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseCookie;
+import org.springframework.http.ResponseCookie.ResponseCookieBuilder;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -103,13 +108,15 @@ public class AuthController {
             return ResponseEntity.badRequest().body(apiResponse);
         }
 
-        Cookie cookie = new Cookie("authToken", jwtToken);
-        cookie.setSecure(true);
-        cookie.setHttpOnly(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(60 * 15);
-        response.addCookie(cookie);
+        ResponseCookie cookie = ResponseCookie.from("authToken", jwtToken)
+                .httpOnly(true)
+                .secure(true)
+                .sameSite("None")
+                .path("/")
+                .maxAge(Duration.ofMinutes(15))
+                .build();
 
+        response.addHeader("Set-Cookie", cookie.toString());
         var correctResponse = new ApiResponse<ResponseAuthDTO>(true, "Logged in", loginResult, null);
 
         return ResponseEntity.ok(correctResponse);
@@ -153,27 +160,30 @@ public class AuthController {
 
     @GetMapping("/checkauth")
     public ResponseEntity<?> checkAuth(HttpServletRequest request) {
-        Map<String, Boolean> response = new HashMap<>();
-        boolean isAuthenticated = request.getCookies() != null &&
-                java.util.Arrays.stream(request.getCookies())
-                        .anyMatch(cookie -> "authToken".equals(cookie.getName()));
-        if (!isAuthenticated) {
-            ApiResponse<Void> apiResponse = new ApiResponse<>(false, "User is not authenticated", null, null);
-            return ResponseEntity.badRequest().body(apiResponse);
+        boolean isAuthenticated = false;
+
+        if (request.getCookies() != null) {
+            isAuthenticated = Arrays.stream(request.getCookies())
+                    .anyMatch(cookie -> "authToken".equals(cookie.getName()));
         }
 
+        Map<String, Boolean> response = new HashMap<>();
         response.put("authenticated", isAuthenticated);
+
         return ResponseEntity.ok(response);
     }
 
     @DeleteMapping("/logout")
-    public ResponseEntity<String> logout( HttpServletResponse response) {
-        Cookie cookie = new Cookie("authToken", null);
-        cookie.setHttpOnly(true);
-        cookie.setSecure(true);
-        cookie.setPath("/");
-        cookie.setMaxAge(0);
-        response.addCookie(cookie);
+    public ResponseEntity<String> logout(HttpServletResponse response) {
+        ResponseCookie cookie = ResponseCookie.from("authToken")
+                .httpOnly(true)
+                .secure(true)
+                .sameSite("None")
+                .path("/")
+                .maxAge(Duration.ofMinutes(0))
+                .build();
+
+        response.addHeader("Set-Cookie", cookie.toString());
 
         return ResponseEntity.ok("U ve been logged out");
     }
