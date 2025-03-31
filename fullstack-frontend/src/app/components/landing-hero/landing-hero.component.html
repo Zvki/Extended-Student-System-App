@@ -1,5 +1,5 @@
 <app-base-layout>
-    <div *ngIf="!(isLoggedIn$ | async)">
+    <div *ngIf="!isLoggedIn">
     <app-dashboard-header>
         <h2>Welcome to ESS</h2>
         <p>Your ultimate solution for managing student and academic data efficiently.</p>
@@ -23,7 +23,7 @@
     </section>
     </section>
     </div>
-    <div *ngIf="isLoggedIn$ | async">
+    <div *ngIf="isLoggedIn">
         <ng-container *ngIf="isStudent$ | async ">
             <app-dashboard-header>
                 <h2>Welcome back, {{ name$ | async}}!</h2>

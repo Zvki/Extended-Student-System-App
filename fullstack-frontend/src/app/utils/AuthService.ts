@@ -25,7 +25,7 @@ export class AuthService {
     this.userService.setUser(userData);
   }
 
-  private checkAuthStatus(): void {
+  public checkAuthStatus(): void {
     if (isPlatformBrowser(this.platformId)) {
       this.http.get(`${environment.apiUrl}checkauth`, { withCredentials: true})
         .subscribe(

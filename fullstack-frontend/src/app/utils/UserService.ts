@@ -1,12 +1,13 @@
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { isPlatformBrowser } from '@angular/common';
 import { BehaviorSubject } from 'rxjs';
+import { UserData } from './types/UserDataInterface';
 
 @Injectable({
   providedIn: 'root',
 })
 export class UserService {
-  private userSubject = new BehaviorSubject<any | null>(null);
+  private userSubject = new BehaviorSubject<UserData | undefined>(undefined);
   user$ = this.userSubject.asObservable();
 
   constructor(@Inject(PLATFORM_ID) private platformId: Object) {
@@ -15,7 +16,7 @@ export class UserService {
     }
   }
 
-  setUser(userData: any): void {
+  setUser(userData: UserData): void {
     console.log('Before save: ', userData)
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.setItem('user', JSON.stringify(userData));
@@ -24,8 +25,11 @@ export class UserService {
     console.log('After save: ', userData)
   }
 
-  getUser(): any {
-    return this.userSubject.value;
+  getUser(): UserData | undefined {
+    if (this.userSubject.value !== null) {
+      return this.userSubject.value;
+    }
+    return undefined;
   }
 
   getUserId(): number | null {
@@ -36,7 +40,7 @@ export class UserService {
     if (isPlatformBrowser(this.platformId)) {
       sessionStorage.removeItem('user');
     }
-    this.userSubject.next(null);
+    this.userSubject.next(undefined);
   }
 
   private loadUserFromStorage(): void {

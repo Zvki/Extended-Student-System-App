@@ -3,6 +3,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '../../utils/AuthService';
 import { NgIf, AsyncPipe } from '@angular/common';
 import { HttpClientModule } from '@angular/common/http';
+import { UserService } from '../../utils/UserService';
 
 @Component({
   selector: 'app-navbar',
@@ -14,13 +15,23 @@ import { HttpClientModule } from '@angular/common/http';
 })
 export class NavbarComponent {
 
-  isLoggedIn$ = this.authService.isLoggedIn$;
+  isLoggedIn = false;
 
-  constructor(private authService: AuthService, private router: Router) {}
+  constructor(private authService: AuthService, private router: Router, private userService: UserService) {}
+
+  ngOnInit(): void {
+    if(this.userService.getUser() !== undefined ){
+      this.isLoggedIn = true 
+    } else {
+      this.isLoggedIn = false
+    }
+  }
 
   logout(): void {
     this.authService.logout();
-    this.router.navigate([""])
+    this.router.navigate([""]).then(() => {
+      window.location.reload();
+    });
   }
 
 }

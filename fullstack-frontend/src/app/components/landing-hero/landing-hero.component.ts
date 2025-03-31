@@ -6,6 +6,7 @@ import { RouterLink } from '@angular/router';
 import { map } from 'rxjs';
 import { DashboardHeaderComponent } from '../dashboard-header/dashboard-header.component';
 import { BaseLayoutComponent } from '../base-layout/base-layout.component';
+import { Role } from '../../utils/types/UserDataInterface';
 
 @Component({
   selector: 'app-landing-hero',
@@ -17,13 +18,22 @@ import { BaseLayoutComponent } from '../base-layout/base-layout.component';
 })
 export class LandingHeroComponent {
 
-  isLoggedIn$ = this.AuthService.isLoggedIn$;
-  name$ = this.userService.user$.pipe(map(user => user?.name));
+  isLoggedIn = false;
+
+  name$ = this.userService.user$.pipe(map(user => user?.name))
   role$ = this.userService.user$.pipe(map(user => user?.role))
 
-  isStudent$ = this.role$.pipe(map(role => role === 'Student'))
-  isTeacher$ = this.role$.pipe(map(role => role === 'Teacher'))
+  isStudent$ = this.role$.pipe(map(role => role === Role.Student))
+  isTeacher$ = this.role$.pipe(map(role => role === Role.Teacher))
 
   constructor(private AuthService: AuthService, private userService: UserService) {}
+
+  ngOnInit(): void {
+    if(this.userService.getUser() !== undefined ){
+      this.isLoggedIn = true 
+    } else {
+      this.isLoggedIn = false
+    }
+  }
 
 }
