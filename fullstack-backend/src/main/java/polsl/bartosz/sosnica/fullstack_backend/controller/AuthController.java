@@ -108,12 +108,7 @@ public class AuthController {
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         cookie.setMaxAge(60 * 15);
-        response.addHeader("Set-Cookie",
-                cookie.getName() + "=" + cookie.getValue() +
-                        "; Path=" + cookie.getPath() +
-                        "; HttpOnly; Secure; SameSite=None");
-
-        System.out.println("Cookie: " + cookie);
+        response.addCookie(cookie);
 
         var correctResponse = new ApiResponse<ResponseAuthDTO>(true, "Logged in", loginResult, null);
 
@@ -172,7 +167,7 @@ public class AuthController {
     }
 
     @DeleteMapping("/logout")
-    public ResponseEntity<String> logout(HttpServletResponse response) {
+    public ResponseEntity<String> logout( HttpServletResponse response) {
         Cookie cookie = new Cookie("authToken", null);
         cookie.setHttpOnly(true);
         cookie.setSecure(true);
