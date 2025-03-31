@@ -1,8 +1,8 @@
 import { isPlatformBrowser } from '@angular/common';
 import { Inject, Injectable, PLATFORM_ID } from '@angular/core';
 import { Router, NavigationEnd } from '@angular/router';
-import { filter } from 'rxjs/operators';
-import { BehaviorSubject } from 'rxjs';
+import { catchError, filter, map } from 'rxjs/operators';
+import { BehaviorSubject, Observable, of } from 'rxjs';
 import { UserService } from './UserService';
 import { environment } from '../../environments/environment';
 import { HttpClient } from '@angular/common/http';
@@ -25,20 +25,21 @@ export class AuthService {
     this.userService.setUser(userData);
   }
 
-  public checkAuthStatus(): void {
+  public checkAuthStatus(): Observable<boolean> {
     if (isPlatformBrowser(this.platformId)) {
-      this.http.get(`${environment.apiUrl}checkauth`, { withCredentials: true})
-        .subscribe(
-          (response: any) => {
-            this.isLoggedIn.next(true)
-          },
-          (error) => {
-            this.isLoggedIn.next(false)
-          }
-        )
-      // const isLoggedIn = this.getCookie('authToken') !== '';
-      // this.isLoggedIn.next(isLoggedIn);
+      return this.http.get<{ authenticated: boolean }>(`${environment.apiUrl}checkauth`, { withCredentials: true })
+        .pipe(
+          map(response => {
+            this.isLoggedIn.next(response.authenticated);
+            return response.authenticated;
+          }),
+          catchError(() => {
+            this.isLoggedIn.next(false);
+            return of(false);
+          })
+        );
     }
+    return of(false);
   }
 
   private listenForRouteChanges(): void {
