@@ -32,11 +32,17 @@ import polsl.bartosz.sosnica.fullstack_backend.utils.MyValidationUtils;
 import org.springframework.web.bind.annotation.RequestParam;
 
 /**
- * Controller responsible for handling student enrollment operations.
- * 
+ * Controller responsible for managing student enrollments into subjects,
+ * assigning grades, and retrieving enrollment-related data.
+ *
  * <p>
- * This controller provides endpoints for enrolling students into subjects and
- * retrieving enrollment details based on user ID.
+ * This controller provides endpoints for:
+ * <ul>
+ * <li>Enrolling a student in a subject</li>
+ * <li>Retrieving a student's enrollment list</li>
+ * <li>Assigning grades to students</li>
+ * <li>Getting enrolled users for a specific subject</li>
+ * </ul>
  * </p>
  * 
  * @author Bartosz Sosnica
@@ -54,11 +60,11 @@ public class EnrollmentController {
     private ISubjectService subjectService;
 
     /**
-     * Constructs an EnrollmentController with the necessary service dependencies.
-     * 
-     * @param enrollmentService the service handling enrollment operations
-     * @param userService       the service managing user-related operations
-     * @param subjectService    the service managing subject-related operations
+     * Constructs an EnrollmentController with the required service dependencies.
+     *
+     * @param enrollmentService service for handling enrollment logic
+     * @param userService       service for retrieving user data
+     * @param subjectService    service for retrieving subject data
      */
     @Autowired
     public EnrollmentController(IEnrollmentService enrollmentService, IUserService userService,
@@ -69,17 +75,16 @@ public class EnrollmentController {
     }
 
     /**
-     * Enrolls a student in a subject.
-     * 
+     * Enrolls a user in a specific subject.
+     *
      * <p>
-     * This method checks if the specified user and subject exist, verifies that the
-     * user is not already enrolled, and then proceeds with the enrollment process.
+     * Performs validation to check if user and subject exist and whether
+     * the user is already enrolled. If valid, creates a new enrollment.
      * </p>
-     * 
-     * @param userId    the ID of the user to be enrolled
-     * @param subjectId the ID of the subject to enroll the user in
-     * @return a {@code ResponseEntity} containing the enrollment result or an error
-     *         message
+     *
+     * @param userId    the ID of the user
+     * @param subjectId the ID of the subject
+     * @return ResponseEntity containing result or error
      */
     @PostMapping("{userId}/enroll/{subjectId}")
     public ResponseEntity<?> enrollStudentToSubject(@PathVariable Long userId, @PathVariable Long subjectId) {
@@ -119,16 +124,10 @@ public class EnrollmentController {
     }
 
     /**
-     * Retrieves all enrollments for a given user.
-     * 
-     * <p>
-     * This method fetches all subjects that a user is enrolled in based on their
-     * user ID.
-     * </p>
-     * 
-     * @param userId the ID of the user whose enrollments are to be retrieved
-     * @return a {@code ResponseEntity} containing a list of enrollments or an error
-     *         message
+     * Retrieves all subjects the specified user is enrolled in.
+     *
+     * @param userId ID of the user
+     * @return ResponseEntity containing list of enrollments or error
      */
     @GetMapping("/getenrollments/{userId}")
     public ResponseEntity<?> findEnrollmentByUserId(@PathVariable Long userId) {
@@ -145,6 +144,12 @@ public class EnrollmentController {
         return ResponseEntity.ok(correctResponse);
     }
 
+    /**
+     * Assigns a grade to a user for a specific subject enrollment.
+     *
+     * @param assignGradeParams data containing user ID, subject ID and grade
+     * @return ResponseEntity containing result or error
+     */
     @PatchMapping("/assigngrade")
     public ResponseEntity<?> assignGrade(@RequestBody RequestAssignGradeDTO assignGradeParams) {
 
@@ -160,6 +165,12 @@ public class EnrollmentController {
         return ResponseEntity.ok(correctResponse);
     }
 
+    /**
+     * Finds all users enrolled in a specific subject along with their grades.
+     *
+     * @param subjectId the ID of the subject
+     * @return ResponseEntity containing list of users or error
+     */
     @GetMapping("/findusersbysubject/{subjectId}")
     public ResponseEntity<?> findUserBySubjectId(@PathVariable Long subjectId) {
 

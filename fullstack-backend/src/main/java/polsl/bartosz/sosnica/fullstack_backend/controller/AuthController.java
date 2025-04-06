@@ -31,15 +31,18 @@ import polsl.bartosz.sosnica.fullstack_backend.utils.JwtTokenUtil;
 import polsl.bartosz.sosnica.fullstack_backend.utils.MyValidationUtils;
 
 /**
- * Controller responsible for handling authentication-related operations,
- * including user login and registration.
+ * REST controller responsible for handling user authentication operations,
+ * including login, registration, authentication check, and logout.
  * 
  * <p>
- * This controller provides endpoints for user authentication using JWT tokens.
- * It validates input data, processes authentication logic through the
- * {@code IAuthService} interface, and responds with appropriate messages.
+ * This controller uses JWT tokens for stateless authentication and interacts
+ * with the {@link IAuthService} to perform core authentication logic.
  * </p>
- *
+ * 
+ * <p>
+ * JWT tokens are set and managed using HTTP-only secure cookies.
+ * </p>
+ * 
  * @author Bartosz Sosnica
  */
 @RestController
@@ -53,9 +56,10 @@ public class AuthController {
     private final JwtTokenUtil jwtTokenUtil;
 
     /**
-     * Constructs an AuthController with the specified authentication service.
-     * 
-     * @param authService the authentication service implementation
+     * Constructs the {@code AuthController} with required dependencies.
+     *
+     * @param authService  authentication service for login and registration
+     * @param jwtTokenUtil utility for handling JWT token generation and validation
      */
     @Autowired
     public AuthController(IAuthService authService, JwtTokenUtil jwtTokenUtil) {
@@ -64,19 +68,16 @@ public class AuthController {
     }
 
     /**
-     * Handles user login requests.
-     * 
+     * Handles user login request.
      * <p>
-     * This method validates user input, attempts authentication through the
-     * authentication service, and generates a JWT token if the login is successful.
-     * If authentication fails, an appropriate response is returned.
+     * Validates login data, authenticates the user, and issues a JWT token as a
+     * secure cookie upon successful login.
      * </p>
-     * 
-     * @param loginData the login request data containing username and password
-     * @param response  the HTTP servlet response, used to set authentication
-     *                  cookies
-     * @return a {@code ResponseEntity} containing authentication result or
-     *         validation errors
+     *
+     * @param loginData login credentials (username and password)
+     * @param response  HTTP response used to set the JWT cookie
+     * @return a {@code ResponseEntity} with authentication result or validation
+     *         errors
      */
     @PostMapping("/login")
     public ResponseEntity<?> login(@RequestBody RequestLoginDTO loginData, HttpServletResponse response) {
@@ -123,16 +124,13 @@ public class AuthController {
     }
 
     /**
-     * Handles user registration requests.
-     * 
+     * Handles user registration request.
      * <p>
-     * This method validates user input, attempts to register a new user through the
-     * authentication service, and returns an appropriate response. If registration
-     * is successful, a success message is returned.
+     * Validates user input and registers a new account via {@link IAuthService}.
      * </p>
-     * 
-     * @param registerData the registration request data containing user details
-     * @return a {@code ResponseEntity} containing registration result or validation
+     *
+     * @param registerData data required to register a new user
+     * @return a {@code ResponseEntity} with the registration result or validation
      *         errors
      */
     @PostMapping("/register")
@@ -158,6 +156,17 @@ public class AuthController {
         return ResponseEntity.ok(correctResponse);
     }
 
+    /**
+     * Checks whether the user is currently authenticated.
+     * 
+     * <p>
+     * Verifies if the request contains a valid JWT token cookie.
+     * </p>
+     *
+     * @param request the HTTP servlet request to extract cookies
+     * @return a {@code ResponseEntity} with a boolean flag indicating
+     *         authentication status
+     */
     @GetMapping("/checkauth")
     public ResponseEntity<?> checkAuth(HttpServletRequest request) {
         boolean isAuthenticated = false;
@@ -173,6 +182,16 @@ public class AuthController {
         return ResponseEntity.ok(response);
     }
 
+    /**
+     * Logs the user out by invalidating the authentication cookie.
+     * 
+     * <p>
+     * The JWT token is deleted from the client by setting a cookie with maxAge = 0.
+     * </p>
+     *
+     * @param response HTTP response used to clear the authentication cookie
+     * @return a {@code ResponseEntity} with a logout message
+     */
     @DeleteMapping("/logout")
     public ResponseEntity<String> logout(HttpServletResponse response) {
         ResponseCookie cookie = ResponseCookie.from("authToken")

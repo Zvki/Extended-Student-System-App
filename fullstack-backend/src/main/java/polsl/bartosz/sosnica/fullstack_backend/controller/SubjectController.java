@@ -70,6 +70,12 @@ public class SubjectController {
 
     }
 
+    /**
+     * Retrieves a list of subjects taught by the specified user.
+     *
+     * @param userId the ID of the user
+     * @return a {@code ResponseEntity} with the subjects taught or error message
+     */
     @GetMapping("/usersteachsubjects/{userId}")
     public ResponseEntity<?> findSubjectsTeachByUser(@PathVariable Long userId) {
 
@@ -85,6 +91,12 @@ public class SubjectController {
         return ResponseEntity.ok(correctResponse);
     }
 
+    /**
+     * Retrieves a list of subjects attended by the specified user.
+     *
+     * @param userId the ID of the user
+     * @return a {@code ResponseEntity} with attended subjects or error message
+     */
     @GetMapping("/usersattemptedsubjects/{userId}")
     public ResponseEntity<?> findSubjectsAttendedByUser(@PathVariable Long userId) {
         var result = subjectService.findSubjectsAttendedByUser(userId);
